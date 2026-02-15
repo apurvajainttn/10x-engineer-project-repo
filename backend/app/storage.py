@@ -52,6 +52,8 @@ class Storage:
     def delete_collection(self, collection_id: str) -> bool:
         if collection_id in self._collections:
             del self._collections[collection_id]
+            # Clear collection_id from prompts associated with this collection
+            self.clear_collection_id_from_prompts(collection_id)
             return True
         return False
     
@@ -64,6 +66,12 @@ class Storage:
         self._prompts.clear()
         self._collections.clear()
 
+    def clear_collection_id_from_prompts(self, collection_id: str):
+        for prompt in self._prompts.values():
+            if prompt.collection_id == collection_id:
+                prompt.collection_id = None
+
 
 # Global storage instance
 storage = Storage()
+
