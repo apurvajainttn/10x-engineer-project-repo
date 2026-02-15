@@ -110,7 +110,8 @@ class TestPrompts:
     def test_sorting_order(self, client: TestClient):
         """Test that prompts are sorted newest first.
         
-        NOTE: This test might fail due to Bug #3!
+        Fixed: Bug #3 has been fixed, and the test now passes. Prompts are correctly
+        sorted in descending order (newest first) when retrieved from the API.
         """
         import time
         
@@ -126,7 +127,7 @@ class TestPrompts:
         prompts = response.json()["prompts"]
         
         # Newest (Second) should be first
-        assert prompts[0]["title"] == "Second"  # Will fail until Bug #3 fixed
+        assert prompts[0]["title"] == "Second"  # Passes now as Bug #3 is fixed
 
 
 class TestCollections:

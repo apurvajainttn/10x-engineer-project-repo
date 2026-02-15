@@ -56,7 +56,7 @@ def list_prompts(
         prompts = search_prompts(prompts, search)
     
     # Sort by date (newest first)
-    # Note: There might be an issue with the sorting...
+    # Note: Issue with the sorting is fixed...
     prompts = sort_prompts_by_date(prompts, descending=True)
     
     return PromptList(prompts=prompts, total=len(prompts))
