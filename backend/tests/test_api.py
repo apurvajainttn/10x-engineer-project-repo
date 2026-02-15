@@ -61,12 +61,12 @@ class TestPrompts:
     def test_get_prompt_not_found(self, client: TestClient):
         """Test that getting a non-existent prompt returns 404.
         
-        NOTE: This test currently FAILS due to Bug #1!
-        The API returns 500 instead of 404.
+        NOTE: This test now passes as Bug #1 is fixed!
+        The API returns 404 now.
         """
         response = client.get("/prompts/nonexistent-id")
-        # This should be 404, but there's a bug...
-        assert response.status_code == 404  # Will fail until bug is fixed
+        # This should be 404.
+        assert response.status_code == 404  # Passing now as bug is fixed
     
     def test_delete_prompt(self, client: TestClient, sample_prompt_data):
         # Create a prompt first
