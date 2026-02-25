@@ -619,6 +619,26 @@ class TestPrompts:
         get_response_after_delete = client.get(f"/prompts/{prompt_id}")
         assert get_response_after_delete.status_code == 404
 
+    def test_update_prompt_with_nonexistent_collection_put(self, client: TestClient, sample_prompt_data):
+        """Test updating a prompt with a nonexistent collection ID using PUT.
+
+        Args:
+            client (TestClient): The HTTP client for testing.
+            sample_prompt_data (dict): Sample data for creating a prompt.
+
+        Asserts:
+            The status code is 400 when updating with a nonexistent collection ID.
+        """
+        # Create a prompt first
+        create_response = client.post("/prompts", json=sample_prompt_data)
+        prompt_id = create_response.json()["id"]
+    
+        # Attempt to update with a nonexistent collection
+        update_data = {"title": "Updated", "collection_id": "nonexistent-collection-id"}
+        response = client.put(f"/prompts/{prompt_id}", json=update_data)
+        assert response.status_code == 400
+        assert "Collection not found" in response.json()["detail"]
+
 
 class TestCollections:
     """Tests for collection endpoints."""
