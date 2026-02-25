@@ -116,27 +116,28 @@ class PromptCreate(PromptBase):
     pass
 
 
-class PromptUpdate(PromptBase):
+class PromptUpdate(BaseModel):
     """
-    Model for updating an existing prompt, extending from PromptBase.
+    Model for updating an existing prompt, with all fields optional.
 
-    Inherits all fields from `PromptBase` which include:
-    - title (str): The title of the prompt.
-    - content (str): The main content of the prompt.
-    - description (Optional[str]): A brief description of the prompt.
-    - collection_id (Optional[str]): An identifier for associating the prompt with a collection.
+    Attributes:
+        title (Optional[str]): The title of the prompt, optional with a minimum length of 1 and maximum of 200 characters.
+        content (Optional[str]): The main content of the prompt, optional with at least 1 character.
+        description (Optional[str]): An optional description of the prompt, with a maximum length of 500 characters.
+        collection_id (Optional[str]): An optional collection identifier that associates the prompt with a specific collection.
 
     Example usage:
         ```python
         update_prompt = PromptUpdate(
             title="Updated Title",
-            content="Updated content details",
-            description="Updated description",
-            collection_id="updatedCollection123"
+            content="Updated content details"
         )
         ```
     """
-    pass
+    title: Optional[str] = Field(None, min_length=1, max_length=200)
+    content: Optional[str] = Field(None, min_length=1)
+    description: Optional[str] = Field(None, max_length=500)
+    collection_id: Optional[str] = None
 
 class PromptPatch(BaseModel):
     """
