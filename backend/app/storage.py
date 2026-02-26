@@ -28,6 +28,7 @@ data to a permanent datastore. It's suitable for development and testing environ
 
 from typing import Dict, List, Optional
 from app.models import Prompt, Collection
+from collections import defaultdict
 
 
 class Storage:
@@ -291,6 +292,40 @@ class Storage:
 
         """
         return [p for p in self._prompts.values() if p.collection_id == collection_id]
+    
+    def get_all_tags(self) -> List[Dict[str, int]]:
+        """
+        Retrieve all tags used across prompts along with their usage count.
+
+        Returns:
+            List[Dict[str, int]]: A list where each entry is a dictionary containing tag and its count.
+
+        Example:
+            storage.get_all_tags()
+        """
+        tag_counter = defaultdict(int)
+        for prompt in self._prompts.values():
+            for tag in prompt.tags:
+                tag_counter[tag] += 1
+
+        return [{"name": tag, "prompt_count": count} for tag, count in tag_counter.items()]
+
+    def delete_tag(self, tag_name: str) -> bool:
+        """
+        Delete a tag from all prompts and storage.
+
+        Returns:
+            bool: True if the tag was found and deleted, False otherwise.
+
+        Example:
+            storage.delete_tag("example-tag")
+        """
+        found = False
+        for prompt in self._prompts.values():
+            if tag_name in prompt.tags:
+                prompt.tags.remove(tag_name)
+                found = True
+        return found
     
     # ============== Utility ==============
     

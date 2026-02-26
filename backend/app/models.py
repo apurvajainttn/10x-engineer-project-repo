@@ -113,7 +113,7 @@ class PromptCreate(PromptBase):
         )
         ```
     """
-    pass
+    tags: List[str] = Field(default_factory=list)
 
 
 class PromptUpdate(BaseModel):
@@ -187,9 +187,29 @@ class Prompt(PromptBase):
     id: str = Field(default_factory=generate_id)
     created_at: datetime = Field(default_factory=get_current_time)
     updated_at: datetime = Field(default_factory=get_current_time)
+    tags: List[str] = Field(default_factory=list)
+
+class Tag(BaseModel):
+    """
+    Model representing a Tag entity with a name and usage count.
+
+    Attributes:
+        name (str): The name of the tag, which is unique.
+        prompt_count (int): The number of prompts associated with this tag.
+    
+    Example usage:
+        ```python
+        tag = Tag(name="AI", prompt_count=5)
+        ```
+    """
+    name: str
+    prompt_count: int = 0
 
     class Config:
         from_attributes = True
+
+class TagsRequest(BaseModel):
+    tags: List[str]
 
 
 # ============== Collection Models ==============

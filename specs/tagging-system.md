@@ -22,7 +22,7 @@ The tagging feature allows users to organize and manage their AI prompts efficie
 
   - **Acceptance Criteria:**
     - Users can remove one or more tags from an individual prompt.
-    - Users receive confirmation before a tag is removed.
+    - Users receive confirmation after a tag is removed.
 
 ### Story 3: Search Prompts by Tags
 - **As a** user
@@ -99,5 +99,3 @@ The tagging feature allows users to organize and manage their AI prompts efficie
 
 ## Search/Filter Requirements
 - Implement a search functionality that allows filtering prompts by tags.
-- Allow AND/OR logic for combining multiple tags in a search query.
-- Optimize for real-time updates to the list of available prompts as tags are modified.

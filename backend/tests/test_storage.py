@@ -236,4 +236,33 @@ def test_edge_cases(storage):
     storage.create_collection(empty_id_collection)
     assert storage.get_collection("") == empty_id_collection
 
+def test_get_all_tags(storage):
+     # Arrange
+     prompt1 = Prompt(id='3', title='Prompt 1', content='Content 1', tags=['tag1', 'tag2'])
+     prompt2 = Prompt(id='4', title='Prompt 2', content='Content 2', tags=['tag2', 'tag3'])
+
+     storage.create_prompt(prompt1)
+     storage.create_prompt(prompt2)
+
+     # Act
+     tags = storage.get_all_tags()
+
+     # Assert
+     expected_tags = [{'name': 'tag1', 'prompt_count': 1}, {'name': 'tag2', 'prompt_count': 2}, {'name': 'tag3', 'prompt_count': 1}]
+     assert all(tag in tags for tag in expected_tags)
+
+
+def test_delete_tag(storage):
+     # Arrange
+     prompt = Prompt(id='5', title='Prompt Tag', content='Content Tag', tags=['delete-me'])
+     storage.create_prompt(prompt)
+
+     # Act
+     tag_deleted = storage.delete_tag('delete-me')
+
+     # Assert
+     assert tag_deleted
+     updated_prompt = storage.get_prompt('5')
+     assert 'delete-me' not in updated_prompt.tags
+
 

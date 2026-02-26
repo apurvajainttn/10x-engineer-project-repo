@@ -36,13 +36,17 @@ Example:
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from typing import Optional
+from typing import List, Optional
+from fastapi.responses import JSONResponse 
+from fastapi import Query
 
 from app.models import (
     Prompt, PromptCreate, PromptUpdate, PromptPatch,
     Collection, CollectionCreate,
     PromptList, CollectionList, HealthResponse,
-    get_current_time
+    Tag,
+    get_current_time,
+    TagsRequest
 )
 from app.storage import storage
 from app.utils import sort_prompts_by_date, filter_prompts_by_collection, search_prompts
@@ -76,7 +80,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 # ============== Health Check ==============
 
@@ -149,6 +152,30 @@ def list_prompts(
     
     return PromptList(prompts=prompts, total=len(prompts))
 
+@app.get("/prompts/search", response_model=PromptList)
+def search_prompts_by_tags(tags: str = Query(None, description="Comma separated list of tags")):
+    """
+    Search prompts using specified tags.
+
+    This endpoint allows users to search for prompts that are tagged with
+    specific tags provided as a query parameter. The tags should be comma-separated.
+
+    Args:
+        tags (str): Comma-separated list of tags to filter prompts.
+
+    Returns:
+        PromptList: A list of prompts matching the specified tags.
+
+    Example:
+        >>> response = client.get("/prompts/search?tags=tag1,tag2")
+    """
+    tag_list = [tag.strip() for tag in tags.split(",")] if tags else []
+    all_prompts = storage.get_all_prompts()
+
+    # Matching logic
+    matching_prompts = [prompt for prompt in all_prompts if set(tag_list).issubset(set(prompt.tags))]
+    return PromptList(prompts=matching_prompts, total=len(matching_prompts))
+
 
 @app.get("/prompts/{prompt_id}", response_model=Prompt)
 def get_prompt(prompt_id: str):
@@ -210,7 +237,13 @@ def create_prompt(prompt_data: PromptCreate):
             raise HTTPException(status_code=400, detail="Collection not found")
     
     prompt = Prompt(**prompt_data.model_dump())
-    return storage.create_prompt(prompt)
+    # Handle tags provided in prompt_data
+    prompt_data.tags = prompt_data.tags or []
+    if prompt_data.tags:
+        unique_tags = set(prompt_data.tags)
+        prompt.tags = list(unique_tags)
+    created_prompt = storage.create_prompt(prompt)
+    return created_prompt
 
 
 @app.put("/prompts/{prompt_id}", response_model=Prompt)
@@ -467,4 +500,111 @@ def delete_collection(collection_id: str):
         raise HTTPException(status_code=404, detail="Collection not found")
     
     return None
+
+@app.post("/prompts/{prompt_id}/tags")
+def add_tags_to_prompt(prompt_id: str, request: TagsRequest):
+    """
+    Adds tags to an existing prompt by prompt_id.
+
+    This function adds unique tags to a prompt ensuring no duplicates and
+    updates are performed safely.
+
+    Args:
+        prompt_id (str): The unique identifier of the prompt to update.
+        request (TagsRequest): A pydantic model containing the list of tags to be added.
+
+    Returns:
+        JSONResponse: Successful addition confirmation message.
+
+    Raises:
+        HTTPException: If the prompt is not found (404), or a duplicate tag is attempted (400).
+    """
+    prompt = storage.get_prompt(prompt_id)
+    if not prompt:
+        raise HTTPException(status_code=404, detail="Prompt not found")
+
+    existing_tags = set(prompt.tags)
+    new_tags = {tag for tag in request.tags if tag not in existing_tags}
+    if not new_tags:
+        raise HTTPException(status_code=400, detail="Duplicate tags were provided")
+
+    prompt.tags.extend(new_tags)
+    storage.update_prompt(prompt_id, prompt)
+
+    return JSONResponse(content={"message": f"Tags added: {list(new_tags)}"})
+
+@app.delete("/prompts/{prompt_id}/tags")
+def remove_tags_from_prompt(prompt_id: str, request: TagsRequest):
+    """
+    Removes tags from an existing prompt by prompt_id.
+
+    This function removes specified tags from a prompt and ensures confirmation for removal action.
+
+    Args:
+        prompt_id (str): The unique identifier of the prompt from which tags are to be removed.
+        request (TagsRequest): A pydantic model containing the list of tags to be removed.
+
+    Returns:
+        JSONResponse: Successful removal confirmation message.
+
+    Raises:
+        HTTPException: If the prompt is not found (404), or tags do not exist (404).
+    """
+    prompt = storage.get_prompt(prompt_id)
+    if not prompt:
+        raise HTTPException(status_code=404, detail="Prompt not found")
+
+    tags_to_remove = set(request.tags)
+    existing_tags = set(prompt.tags)
+
+    if not tags_to_remove.intersection(existing_tags):
+        raise HTTPException(status_code=404, detail="Tags not found on prompt")
+
+    prompt.tags = list(existing_tags - tags_to_remove)
+    storage.update_prompt(prompt_id, prompt)
+
+    return JSONResponse(content={"message": "Tags removed successfully"})
+
+@app.get("/tags", response_model=List[Tag])
+def list_tags():
+    """
+    Retrieve a list of all tags with their usage count.
+
+    This endpoint fetches all tags that are currently being used across prompts, along with the count of how many prompts each tag is associated with.
+
+    Returns:
+        List[Tag]: A list of Tag objects, each containing a tag name and its usage count.
+
+    Example:
+        >>> response = client.get("/tags")
+        >>> assert response.status_code == 200
+        >>> assert "name" in response.json()[0]
+    """
+    all_tag_objects = storage.get_all_tags()
+    return all_tag_objects
+
+
+@app.delete("/tags/{tag_name}", status_code=204)
+def delete_tag(tag_name: str):
+    """
+    Deletes a tag by its name.
+
+    Removes a tag completely from the system, ensuring it is also removed from any associated prompts.
+
+    Args:
+        tag_name (str): The name of the tag to be deleted.
+
+    Returns:
+        None: This function returns nothing on successful deletion.
+
+    Raises:
+        HTTPException: If the tag is not found (404).
+
+    Example:
+        >>> delete_tag('tag_to_remove')
+    """
+    if not storage.delete_tag(tag_name):
+        raise HTTPException(status_code=404, detail="Tag not found")
+    return None
+
 
