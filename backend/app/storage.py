@@ -26,13 +26,13 @@ This instance is used throughout the application to manage and retrieve prompts 
 data to a permanent datastore. It's suitable for development and testing environments.
 """
 
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Type, Union
 from app.models import Prompt, Collection
 from collections import defaultdict
 
 
 class Storage:
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Initializes an instance of the Storage class.
 
@@ -50,6 +50,80 @@ class Storage:
         """
         self._prompts: Dict[str, Prompt] = {}
         self._collections: Dict[str, Collection] = {}
+
+    # ============== Private Helper Methods ==============
+
+    def _store_item(self, storage: Dict[str, Union[Prompt, Collection]], item: Union[Prompt, Collection]) -> Union[Prompt, Collection]:
+        """
+        Stores an item in the specified storage dictionary.
+
+        Args:
+            storage (Dict[str, Union[Prompt, Collection]]): The storage dictionary where the item will be stored.
+            item (Union[Prompt, Collection]): The item to be added to the storage.
+
+        Returns:
+            Union[Prompt, Collection]: The item that was added to the storage.
+
+        Example:
+            storage = Storage()
+            new_prompt = Prompt(id='abc', content='Hello World')
+            storage._store_item(storage._prompts, new_prompt)
+        """
+        storage[item.id] = item
+        return item
+
+    def _retrieve_item_by_id(self, storage: Dict[str, Union[Prompt, Collection]], item_id: str) -> Optional[Union[Prompt, Collection]]:
+        """
+        Retrieves an item by its ID from the specified storage dictionary.
+
+        Args:
+            storage (Dict[str, Union[Prompt, Collection]]): The storage dictionary to search from.
+            item_id (str): The unique identifier of the item to retrieve.
+
+        Returns:
+            Optional[Union[Prompt, Collection]]: The item retrieved if found, otherwise None.
+
+        Example:
+            storage = Storage()
+            prompt = storage._retrieve_item_by_id(storage._prompts, 'prompt_id_123')
+        """
+        return storage.get(item_id)
+
+    def _retrieve_all_items(self, storage: Dict[str, Union[Prompt, Collection]]) -> List[Union[Prompt, Collection]]:
+        """
+        Retrieves all items from the specified storage dictionary.
+
+        Args:
+            storage (Dict[str, Union[Prompt, Collection]]): The storage dictionary containing items.
+
+        Returns:
+            List[Union[Prompt, Collection]]: A list of all items in the storage.
+
+        Example:
+            storage = Storage()
+            prompts = storage._retrieve_all_items(storage._prompts)
+        """
+        return list(storage.values())
+
+    def _remove_item_by_id(self, storage: Dict[str, Union[Prompt, Collection]], item_id: str) -> bool:
+        """
+        Removes an item by its ID from the specified storage dictionary.
+
+        Args:
+            storage (Dict[str, Union[Prompt, Collection]]): The storage dictionary from which the item will be removed.
+            item_id (str): The unique identifier of the item to be removed.
+
+        Returns:
+            bool: True if the item was successfully removed, False if it was not found.
+
+        Example:
+            storage = Storage()
+            result = storage._remove_item_by_id(storage._prompts, "1234")
+        """
+        if item_id in storage:
+            del storage[item_id]
+            return True
+        return False
     
     # ============== Prompt Operations ==============
     
@@ -63,16 +137,12 @@ class Storage:
         Returns:
             Prompt: The prompt that was added to the storage.
 
-        Raises:
-            KeyError: If a prompt with the same ID already exists in the storage.
-
         Example:
             storage = Storage()
             new_prompt = Prompt(id='abc', content='Hello World')
             storage.create_prompt(new_prompt)
         """
-        self._prompts[prompt.id] = prompt
-        return prompt
+        return self._store_item(self._prompts, prompt)
     
     def get_prompt(self, prompt_id: str) -> Optional[Prompt]:
         """
@@ -95,7 +165,7 @@ class Storage:
             else:
                 print("Prompt not found.")
         """
-        return self._prompts.get(prompt_id)
+        return self._retrieve_item_by_id(self._prompts, prompt_id)
     
     def get_all_prompts(self) -> List[Prompt]:
         """
@@ -117,7 +187,7 @@ class Storage:
             for prompt in prompts:
                 print(prompt)
         """
-        return list(self._prompts.values())
+        return self._retrieve_all_items(self._prompts)
     
     def update_prompt(self, prompt_id: str, prompt: Prompt) -> Optional[Prompt]:
         """
@@ -129,9 +199,6 @@ class Storage:
 
         Returns:
             Optional[Prompt]: The updated prompt if the update was successful, otherwise None.
-
-        Raises:
-            KeyError: If the prompt_id does not exist in the storage.
 
         Example:
             storage = Storage()
@@ -156,9 +223,6 @@ class Storage:
         Returns:
             bool: True if the prompt was successfully deleted, False if the prompt was not found.
 
-        Raises:
-            KeyError: If an attempt is made to delete a prompt that does not exist in the storage.
-
         Example:
             storage = Storage()
             result = storage.delete_prompt("1234")
@@ -167,10 +231,7 @@ class Storage:
             else:
                 print("Prompt not found.")
         """
-        if prompt_id in self._prompts:
-            del self._prompts[prompt_id]
-            return True
-        return False
+        return self._remove_item_by_id(self._prompts, prompt_id)
     
     # ============== Collection Operations ==============
     
@@ -183,16 +244,12 @@ class Storage:
         
         Returns:
             Collection: The collection object that was added to the storage.
-
-        Raises:
-            KeyError: If a collection with the same id already exists.
     
         Example usage:
             collection = Collection(id='123', ...)
             storage.create_collection(collection)
         """
-        self._collections[collection.id] = collection
-        return collection
+        return self._store_item(self._collections, collection)
     
     def get_collection(self, collection_id: str) -> Optional[Collection]:
         """
@@ -203,9 +260,6 @@ class Storage:
 
         Returns:
             Optional[Collection]: The collection object if found, otherwise None.
-
-        Raises:
-            KeyError: If the collection_id is not found in the collections dictionary.
         
         Example:
             storage = Storage()
@@ -215,7 +269,7 @@ class Storage:
             else:
                 print("Collection not found.")
         """
-        return self._collections.get(collection_id)
+        return self._retrieve_item_by_id(self._collections, collection_id)
     
     def get_all_collections(self) -> List[Collection]:
         """
@@ -238,7 +292,7 @@ class Storage:
             for collection in collections:
                 print(collection.name)
         """
-        return list(self._collections.values())
+        return self._retrieve_all_items(self._collections)
     
     def delete_collection(self, collection_id: str) -> bool:
         """
@@ -253,9 +307,6 @@ class Storage:
         Returns:
             bool: True if the collection was successfully deleted, False otherwise.
 
-        Raises:
-            KeyError: If the collection_id is not present in the storage.
-
         Example:
             storage = Storage()
             collection_id = 'abc123'
@@ -264,14 +315,12 @@ class Storage:
             else:
                 print(f"Collection {collection_id} not found.")
         """
-        if collection_id in self._collections:
-            del self._collections[collection_id]
-            # Clear collection_id from prompts associated with this collection
-            self.clear_collection_id_from_prompts(collection_id)
-            return True
-        return False
+        result = self._remove_item_by_id(self._collections, collection_id)
+        if result:
+            self.dissociate_prompts_from_collection(collection_id)
+        return result
     
-    def get_prompts_by_collection(self, collection_id: str) -> List[Prompt]:
+    def retrieve_prompts_by_collection_id(self, collection_id: str) -> List[Prompt]:
         """
         Retrieve prompts associated with a specific collection ID.
 
@@ -281,9 +330,6 @@ class Storage:
         Returns:
             List[Prompt]: A list of Prompt objects that belong to the specified collection.
 
-        Raises:
-            KeyError: If the collection with the specified ID does not exist.
-
         Example:
             storage = Storage()
             prompts = storage.get_prompts_by_collection('collection_123')
@@ -292,6 +338,21 @@ class Storage:
 
         """
         return [p for p in self._prompts.values() if p.collection_id == collection_id]
+    
+    # ============== Tags Operations ==============
+    
+    def _count_tags_usage(self) -> Dict[str, int]:
+        """
+        Count the usage of each tag across all prompts.
+
+        Returns:
+            Dict[str, int]: A dictionary where keys are tag names and values are their respective usage count.
+        """
+        tag_counter = defaultdict(int)
+        for prompt in self._prompts.values():
+            for tag in prompt.tags:
+                tag_counter[tag] += 1
+        return tag_counter
     
     def get_all_tags(self) -> List[Dict[str, int]]:
         """
@@ -303,11 +364,7 @@ class Storage:
         Example:
             storage.get_all_tags()
         """
-        tag_counter = defaultdict(int)
-        for prompt in self._prompts.values():
-            for tag in prompt.tags:
-                tag_counter[tag] += 1
-
+        tag_counter = self._count_tags_usage()
         return [{"name": tag, "prompt_count": count} for tag, count in tag_counter.items()]
 
     def delete_tag(self, tag_name: str) -> bool:
@@ -329,7 +386,7 @@ class Storage:
     
     # ============== Utility ==============
     
-    def clear(self):
+    def clear(self) -> None:
         """
         Clear all entries in the storage.
 
@@ -354,7 +411,7 @@ class Storage:
         self._prompts.clear()
         self._collections.clear()
 
-    def clear_collection_id_from_prompts(self, collection_id: str):
+    def dissociate_prompts_from_collection(self, collection_id: str) -> None:
         """
         Clears the specified collection ID from all prompts.
 
@@ -366,9 +423,6 @@ class Storage:
 
         Returns:
             None
-
-        Raises:
-            KeyError: If a prompt does not have a `collection_id` attribute.
 
         Example:
             storage = Storage()
