@@ -116,7 +116,7 @@ def test_delete_non_existent_collection(storage):
     assert storage.delete_collection("nonexistent") is False
 
 
-def test_get_prompts_by_collection(storage):
+def test_retrieve_prompts_by_collection_id(storage):
     """Test retrieving prompts by collection ID and verify correct prompts are returned.
 
     Args:
@@ -137,7 +137,7 @@ def test_get_prompts_by_collection(storage):
     storage.create_prompt(prompt2)
     storage.create_prompt(prompt3)
 
-    collection_prompts = storage.get_prompts_by_collection(collection.id)
+    collection_prompts = storage.retrieve_prompts_by_collection_id(collection.id)
     assert len(collection_prompts) == 2
     assert prompt1 in collection_prompts
     assert prompt2 in collection_prompts
@@ -160,7 +160,7 @@ def test_clear(storage):
     assert storage.get_all_collections() == []
 
 
-def test_clear_collection_id_from_prompts(storage):
+def test_dissociate_prompts_from_collection(storage):
     """Test clearing collection ID from prompts.
 
     Args:
@@ -174,7 +174,7 @@ def test_clear_collection_id_from_prompts(storage):
     storage.create_prompt(prompt1)
     storage.create_prompt(prompt2)
 
-    storage.clear_collection_id_from_prompts("clear_id")
+    storage.dissociate_prompts_from_collection("clear_id")
     assert storage.get_prompt("cp1").collection_id is None
     assert storage.get_prompt("cp2").collection_id is None
 
