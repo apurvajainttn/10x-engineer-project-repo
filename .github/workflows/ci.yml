@@ -37,4 +37,5 @@ jobs:
 
     - name: Check coverage
       run: |
+        cd backend
         coverage report --fail-under=80
