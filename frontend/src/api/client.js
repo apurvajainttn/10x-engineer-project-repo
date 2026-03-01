@@ -1,13 +1,15 @@
-const BASE_URL = 'http://localhost:8000/api';
+const BASE_URL = 'https://fuzzy-fortnight-5g6rw9p9vgqwfvg4x-8000.app.github.dev';
 
 async function fetchWrapper(url, options = {}) {
   try {
+    const isBodyRequest = options.body !== undefined;
+
     const response = await fetch(`${BASE_URL}${url}`, {
+      ...options,
       headers: {
-        'Content-Type': 'application/json',
+        ...(isBodyRequest && { 'Content-Type': 'application/json' }),
         ...options.headers,
       },
-      ...options,
     });
 
     if (!response.ok) {
@@ -15,7 +17,6 @@ async function fetchWrapper(url, options = {}) {
       throw new Error(errorData.message || 'Something went wrong');
     }
 
-    // Resolve with JSON data
     return response.json();
   } catch (error) {
     console.error('API Error:', error);
