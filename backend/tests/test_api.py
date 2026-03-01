@@ -120,6 +120,7 @@ class TestPrompts:
         response = client.get("/prompts/nonexistent-id")
         # This should be 404.
         assert response.status_code == 404  # Passing now as bug is fixed
+        assert response.json() == {"detail": "Prompt not found"}
     
     def test_delete_prompt(self, client: TestClient, sample_prompt_data):
         """Test deleting an existing prompt.
@@ -689,6 +690,7 @@ class TestCollections:
         """
         response = client.get("/collections/nonexistent-id")
         assert response.status_code == 404
+        assert response.json() == {"detail": "Collection not found"}
     
     def test_delete_collection_with_prompts(self, client: TestClient, sample_collection_data, sample_prompt_data):
         """Test deleting a collection that has prompts.
@@ -750,6 +752,7 @@ class TestCollections:
         """
         response = client.delete("/collections/nonexistent-id")
         assert response.status_code == 404
+        assert response.json()["detail"] == "Collection not found"
 
     def test_create_collection_with_invalid_data_types(self, client: TestClient):
         """Test creating a collection with invalid data types.
