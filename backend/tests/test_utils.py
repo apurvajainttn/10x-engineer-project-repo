@@ -63,6 +63,43 @@ def test_search_prompts():
     assert len(results) == 1
     assert results[0].title == "Hello World"
 
+def test_search_prompts_empty_query():
+    """
+    Test searching functionality with an empty query string.
+
+    Ensures that no prompts are returned when an empty query is provided.
+    """
+    prompts = [
+        create_prompt(title="Hello World", description="Example description"),
+        create_prompt(title="Another Story", description="Another example")
+    ]
+    results = search_prompts(prompts, "")
+    assert len(results) == 0
+
+def test_search_prompts_case_insensitivity():
+    """
+    Test searching functionality is case-insensitive.
+    """
+    prompts = [
+        create_prompt(title="Hello World", description="Example description"),
+        create_prompt(title="Another Story", description="Another example")
+    ]
+    results = search_prompts(prompts, "HELLO")
+    assert len(results) == 1
+    assert results[0].title == "Hello World"
+
+def test_search_prompts_no_description():
+    """
+    Test searching functionality for prompts without a description.
+    """
+    prompts = [
+        create_prompt(title="Alone", description=None),
+        create_prompt(title="Silent", description=None)
+    ]
+    results = search_prompts(prompts, "alone")
+    assert len(results) == 1
+    assert results[0].title == "Alone"
+
 def test_validate_prompt_content():
     """
     Test validation of prompt content.

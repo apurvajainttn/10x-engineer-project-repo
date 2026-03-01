@@ -23,6 +23,63 @@ Usage examples for each function can be found in their respective docstrings.
 from typing import List
 from app.models import Prompt
 
+def is_content_valid(content: str, min_length: int = 10) -> bool:
+    """
+    Checks if a given content string meets specified validation criteria.
+
+    This function ensures that the content is not empty, does not consist solely
+    of whitespace, and is at least a specified minimum length.
+
+    Args:
+        content (str): The content string to validate.
+        min_length (int): The minimum length that the content must have to be valid.
+
+    Returns:
+        bool: Returns True if content is valid according to the criteria, otherwise False.
+
+    Raises:
+        None: This function does not explicitly raise any exceptions.
+
+    Example:
+        >>> is_content_valid("Hello world")
+        True
+        >>> is_content_valid("     ")
+        False
+    """
+    return bool(content and content.strip() and len(content.strip()) >= min_length)
+
+
+def does_prompt_match_query(prompt: Prompt, query: str) -> bool:
+    """
+    Determines if a given prompt matches a query string.
+
+    This function checks if the query string is found within the title or description
+    of the provided prompt, case-insensitively.
+
+    Args:
+        prompt (Prompt): The prompt object containing the fields to be searched.
+        query (str): The search query string to match against the prompt's fields.
+
+    Returns:
+        bool: Returns True if the query string matches any part of the prompt's title
+              or description, otherwise False.
+
+    Raises:
+        AttributeError: If the `prompt` object does not have `title` or `description`
+                        attributes.
+
+    Example:
+        >>> prompt = Prompt(title="Test Title", description="Some Description")
+        >>> does_prompt_match_query(prompt, "test")
+        True
+    """
+    if not query:
+        return False
+    lowercase_query = query.lower()
+    return lowercase_query in prompt.title.lower() or (
+        prompt.description and lowercase_query in prompt.description.lower()
+    )
+
 
 def sort_prompts_by_date(prompts: List[Prompt], descending: bool = True) -> List[Prompt]:
     """
@@ -103,12 +160,7 @@ def search_prompts(prompts: List[Prompt], query: str) -> List[Prompt]:
         >>> search_prompts(prompts, "hello")
         [Prompt(title="Hello World", description="Example description")]
     """
-    query_lower = query.lower()
-    return [
-        p for p in prompts 
-        if query_lower in p.title.lower() or 
-           (p.description and query_lower in p.description.lower())
-    ]
+    return [p for p in prompts if does_prompt_match_query(p, query)]
 
 
 def validate_prompt_content(content: str) -> bool:
@@ -135,9 +187,7 @@ def validate_prompt_content(content: str) -> bool:
         >>> validate_prompt_content("Valid prompt content")
         True
     """
-    if not content or not content.strip():
-        return False
-    return len(content.strip()) >= 10
+    return is_content_valid(content)
 
 
 def extract_variables(content: str) -> List[str]:
@@ -163,5 +213,5 @@ def extract_variables(content: str) -> List[str]:
         ['name', 'account_number']
     """
     import re
-    pattern = r'\{\{(\w+)\}\}'
-    return re.findall(pattern, content)
+    variable_pattern: str = r'\{\{(\w+)\}\}'
+    return re.findall(variable_pattern, content)
