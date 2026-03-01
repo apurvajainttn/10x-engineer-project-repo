@@ -45,7 +45,7 @@ from app.models import (
     Collection, CollectionCreate,
     PromptList, CollectionList, HealthResponse,
     Tag,
-    get_current_time,
+    get_current_utc_time,
     TagsRequest
 )
 from app.storage import storage
@@ -296,7 +296,7 @@ def update_prompt(prompt_id: str, prompt_data: PromptUpdate):
             description=prompt_data.description,
             collection_id=prompt_data.collection_id,
             created_at=existing.created_at,
-            updated_at=get_current_time()  # Fix: Update to current time
+            updated_at=get_current_utc_time()  # Fix: Update to current time
         )
     )
     
@@ -357,7 +357,7 @@ def patch_prompt(prompt_id: str, prompt_data: PromptPatch):
         description=update_prompt_data.get("description", existing.description),
         collection_id=update_prompt_data.get("collection_id", existing.collection_id),
         created_at=existing.created_at,
-        updated_at=get_current_time(),
+        updated_at=get_current_utc_time(),
     )
 
     return storage.update_prompt(prompt_id, updated_prompt)

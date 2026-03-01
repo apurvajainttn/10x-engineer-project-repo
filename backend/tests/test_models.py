@@ -7,8 +7,8 @@ from app.models import (
     Prompt,
     CollectionCreate,
     Collection,
-    generate_id,
-    get_current_time,
+    generate_unique_identifier,
+    get_current_utc_time,
     HealthResponse
 )
 

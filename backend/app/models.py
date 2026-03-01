@@ -6,8 +6,8 @@ designed to be used within the PromptLab application. Each model is defined
 using Pydantic's BaseModel to provide data validation and serialization.
 
 Functions:
-    generate_id(): Generates a unique identifier using UUID4.
-    get_current_time(): Retrieves the current UTC time.
+    generate_unique_identifier(): Generates a unique identifier using UUID4.
+    get_current_utc_time(): Retrieves the current UTC time.
 
 Classes:
     PromptBase: Base model for prompts.
@@ -29,35 +29,38 @@ from pydantic import BaseModel, Field
 from uuid import uuid4
 
 
-def generate_id() -> str:
+def generate_unique_identifier() -> str:
     """
-    Generate a unique identifier as a string using UUID version 4.
+    Generate a unique identifier using UUID version 4.
 
     Returns:
         str: A unique identifier string generated using UUID4.
 
+    Raises:
+        None
+
     Example usage:
-        >>> unique_id = generate_id()
+        >>> unique_id = generate_unique_identifier()
         >>> print(unique_id)
         'f47ac10b-58cc-4372-a567-0e02b2c3d479'
     """
     return str(uuid4())
 
 
-def get_current_time() -> datetime:
+def get_current_utc_time() -> datetime:
     """
-    Get the current UTC time.
+    Retrieve the current UTC time.
 
-    This function returns the current time in Coordinated Universal Time (UTC).
-
-    Args:
-        None
+    This function provides the current time in Coordinated Universal Time (UTC).
 
     Returns:
         datetime: The current UTC time.
 
+    Raises:
+        None
+
     Example usage:
-        >>> current_time = get_current_time()
+        >>> current_time = get_current_utc_time()
         >>> print(current_time)
         datetime.datetime(2023, 10, 5, 12, 0, 0)
     """
@@ -184,9 +187,9 @@ class Prompt(PromptBase):
         print(stored_prompt.id)
         ```
     """
-    id: str = Field(default_factory=generate_id)
-    created_at: datetime = Field(default_factory=get_current_time)
-    updated_at: datetime = Field(default_factory=get_current_time)
+    id: str = Field(default_factory=generate_unique_identifier)
+    created_at: datetime = Field(default_factory=get_current_utc_time)
+    updated_at: datetime = Field(default_factory=get_current_utc_time)
     tags: List[str] = Field(default_factory=list)
 
 class Tag(BaseModel):
@@ -254,8 +257,8 @@ class Collection(CollectionBase):
     Example usage:
         collection = Collection(id='123', name='Artifacts', created_at=datetime.now())
     """
-    id: str = Field(default_factory=generate_id)
-    created_at: datetime = Field(default_factory=get_current_time)
+    id: str = Field(default_factory=generate_unique_identifier)
+    created_at: datetime = Field(default_factory=get_current_utc_time)
 
     class Config:
         from_attributes = True
