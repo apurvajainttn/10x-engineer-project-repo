@@ -17,6 +17,11 @@ async function fetchWrapper(url, options = {}) {
       throw new Error(errorData.message || 'Something went wrong');
     }
 
+    // Handle 204 No Content
+    if (response.status === 204) {
+      return { status: 204, message: 'No Content' }; // Or return null or custom object
+    }
+
     return response.json();
   } catch (error) {
     console.error('API Error:', error);
