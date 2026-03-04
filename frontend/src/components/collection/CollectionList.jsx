@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { getCollections, deleteCollection } from '../../api/collections'; // Import collection API functions
 import CollectionCard from './CollectionCard'; // Assume CollectionCard is where individual collections are rendered
-import LoadingSpinner from '../../../utils/LoadingSpinner';
-import ErrorMessage from '../../../utils/ErrorMessage';
+import LoadingSpinner from '../utils/LoadingSpinner';
+import ErrorMessage from '../utils/ErrorMessage';
 
 const CollectionList = () => {
   const [collections, setCollections] = useState([]);

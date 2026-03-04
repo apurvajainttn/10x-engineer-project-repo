@@ -8,13 +8,14 @@ import EditPrompt from './components/prompt/EditPrompt';
 import CollectionForm from './components/collection/CollectionForm';
 import CollectionList from './components/collection/CollectionList';
 import PromptDetail from './components/prompt/PromptDetail';
+import HomePage from './components/homepage/HomePage'
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<h1>Welcome to the Prompt Dashboard</h1>} />
+          <Route index element={<HomePage />} />
           <Route path="dashboard" element={<PromptList />} />
           <Route path="create-prompt" element={<PromptForm />} />
           <Route path="edit-prompt/:id" element={<EditPrompt />} />

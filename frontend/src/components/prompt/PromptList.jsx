@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { getPrompts, deletePrompt } from '../../api/prompts';
 import { getCollections } from '../../api/collections'; // Import collections API
 import PromptCard from './PromptCard';
-import LoadingSpinner from '../../../utils/LoadingSpinner';
-import ErrorMessage from '../../../utils/ErrorMessage';
+import LoadingSpinner from '../utils/LoadingSpinner';
+import ErrorMessage from '../utils/ErrorMessage';
 
 const PromptList = () => {
   const [prompts, setPrompts] = useState([]);

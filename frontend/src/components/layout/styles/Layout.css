@@ -1,17 +1,24 @@
-.app-layout {
+/* .app-layout {
+  min-height: 100vh;
+  width: 100vw;
   display: flex;
+  justify-content: center;
   flex-direction: column;
-}
+  margin: 0;
+} */
 
-.layout-body {
+/* .layout-body {
   display: flex;
-}
+  width: 100%;
+  justify-content: center;
+} */
 
-.main-content {
-  padding: 20px;
+/* .main-content {
   flex: 1;
+  max-width: 1280px;
+  width: 100%;
   box-sizing: border-box;
-  background-color: #ffffff;
+  background: transparent;
   overflow-y: auto;
-  margin-top: 60px;
-}
+  margin: 0;
+} */

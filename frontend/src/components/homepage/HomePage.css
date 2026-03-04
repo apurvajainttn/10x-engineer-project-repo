@@ -1,0 +1,52 @@
+.home-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url('../../assets/PromptLabHomeBackground.png');
+  background-size: cover;
+}
+
+.home-title-first {
+  background: linear-gradient(90deg, #F3A6C6, #E88BB8);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 6rem;
+  margin-top: 220px;
+  margin-bottom: 0;
+}
+
+.home-title-second {
+  background: linear-gradient(90deg, #4FC3E6, #6C7BFF, #7A5CFF);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 8rem;
+  margin-top: 0px;
+  margin-bottom: 0;
+}
+
+.home-sub-title {
+  color: #4f54b1;
+  font-size: 1.5rem;
+  margin-top: 20px;
+}
+
+.button-group {
+  display: flex;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.action-button {
+  background: linear-gradient(135deg, #7B61FF, #8E6BFF);;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}

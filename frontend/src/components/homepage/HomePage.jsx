@@ -1,0 +1,37 @@
+import React from 'react';
+import Button from '../../components/utils/Button'
+import './HomePage.css';
+import { useNavigate } from 'react-router-dom';
+
+const HomePage = () => {
+
+  const navigate = useNavigate(); 
+
+  const handleCreatePromptClick = () => {
+    // Replace with actual navigation logic to open the Prompt Form
+    navigate(`/create-prompt`);
+  };
+
+  const handleListPromptsClick = () => {
+    // Replace with actual navigation logic to open the Prompt List
+    navigate(`/dashboard`);
+  };
+
+  return (
+    <div className="home-container">
+      <h1 className="home-title-first">Welcome to</h1>
+      <h1 className="home-title-second">Prompt Lab!</h1>
+      <h2 className="home-sub-title">Create, list and manage your prompts with ease</h2>
+      <div className="button-group">
+        <Button className="action-button" onClick={handleCreatePromptClick}>
+          Create a New Prompt
+        </Button>
+        <Button className="action-button" onClick={handleListPromptsClick}>
+          List Prompts
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export default HomePage;

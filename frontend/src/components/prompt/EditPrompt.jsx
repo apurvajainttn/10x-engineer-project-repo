@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PromptForm from './PromptForm';
 import { getPrompt } from '../../api/prompts';
-import LoadingSpinner from '../../../utils/LoadingSpinner';
-import ErrorMessage from '../../../utils/ErrorMessage';
+import LoadingSpinner from '../utils/LoadingSpinner';
+import ErrorMessage from '../utils/ErrorMessage';
 
 const EditPrompt = () => {
   const { id } = useParams();
