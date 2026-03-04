@@ -1,8 +1,15 @@
 import React from 'react';
 import './styles/Header.css';
 import PromptLabLogo from '../../assets/PromptLabLogo.png';
+import { useNavigate } from 'react-router-dom';
 
 const Header = ({ onToggleSidebar }) => {
+  const navigate = useNavigate();
+
+  const redirectToHome = () => {
+    navigate('/');
+  };
+
   return (
     <header className="app-header">
       <div className="header-left">
@@ -15,10 +22,6 @@ const Header = ({ onToggleSidebar }) => {
       </div>
     </header>
   );
-};
-
-const redirectToHome = () => {
-  window.location.href = '/';
 };
 
 export default Header;

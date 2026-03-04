@@ -1,6 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './styles/Sidebar.css';
+import viewPromptsIcon from "../../assets/ViewPromptsIcon.svg";
+import createPromptIcon from "../../assets/CreatePromptIcon.svg";
+import createCollectionIcon from "../../assets/CreateCollectionIcon.svg";
+import listCollectionsIcon from "../../assets/ViewCollectionsIcon.svg";
+import homeIcon from "../../assets/HomeIcon.svg";
+import promptLabLogo from "../../assets/PromptLabLogo.png";
 
 const Sidebar = ({ isVisible, onClose }) => {
 
@@ -14,12 +20,16 @@ const Sidebar = ({ isVisible, onClose }) => {
     <aside className={`app-sidebar ${isVisible ? 'visible' : 'hidden'}`}>
       <nav className="sidebar-navigation">
         <ul>
-          <li><Link to="/dashboard" onClick={handleLinkClick}>View All Prompts</Link></li>
-          <li><Link to="/create-prompt" onClick={handleLinkClick}>Create New Prompt</Link></li>
-          <li><Link to="/create-collections" onClick={handleLinkClick}>Create Collections</Link></li>
-          <li><Link to="/list-collections" onClick={handleLinkClick}>List Collections</Link></li>
+          <li><Link to="/" onClick={handleLinkClick}><img src={homeIcon} width={24} height={24} alt="Home Icon"/>Home</Link></li>
+          <li><Link to="/dashboard" onClick={handleLinkClick}><img src={viewPromptsIcon} width={24} height={24}/>View All Prompts</Link></li>
+          <li><Link to="/create-prompt" onClick={handleLinkClick}><img src={createPromptIcon} width={24} height={24}/>Create New Prompt</Link></li>
+          <li><Link to="/create-collections" onClick={handleLinkClick}><img src={createCollectionIcon} width={24} height={24}/>Create New Collection</Link></li>
+          <li><Link to="/list-collections" onClick={handleLinkClick}><img src={listCollectionsIcon} width={24} height={24}/>List All Collections</Link></li>
         </ul>
       </nav>
+      <div className="sidebar-footer">
+        <img src={promptLabLogo} alt="PromptLab Logo" className="prompt-lab-logo"/>
+      </div>
     </aside>
   );
 };

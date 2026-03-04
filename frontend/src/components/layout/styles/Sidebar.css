@@ -1,13 +1,13 @@
 .app-sidebar {
-  width: 250px;
-  background-color: #f0f0f0;
-  height: calc(100vh - 50px); /* Adjust for header height */
-  margin-top: 80px; /* Align with header height */
+  width: 280px;
+  background: linear-gradient(to bottom, #1a002c, #756095, #ffffffbd);
+  height: calc(100vh - 50px);
+  margin-top: 80px;
   position: fixed;
   top: 0;
   left: 0;
   overflow-y: auto;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   z-index: 500;
   transform: translateX(-100%);
@@ -25,15 +25,36 @@
 
 .sidebar-navigation li {
   padding: 10px 20px;
+  margin-bottom: 5px;
+}
+
+.sidebar-navigation li:first-child {
+  margin-top: 30px;
 }
 
 .sidebar-navigation a {
   text-decoration: none;
-  color: #000;
-  display: block;
+  color: #ffffff;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
   transition: background-color 0.3s;
+  font-size: 1.1rem;
 }
 
-.sidebar-navigation a:hover {
-  background-color: #e7e7e7;
+.sidebar-navigation img {
+  margin-right: 10px;
+  transition: fill 0.3s;
+}
+
+.sidebar-footer {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.prompt-lab-logo {
+  width: 200px; 
 }
