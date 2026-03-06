@@ -157,9 +157,3 @@
   }
 
 }
-
-@media (max-width: 768px) {
-  .prompt-page-header .back-button {
-    display: none;
-  }
-}

@@ -252,9 +252,3 @@ textarea:focus {
     min-height: 100px;
   }
 }
-
-@media (max-width: 768px) {
-  .prompt-page-header .back-button {
-    display: none;
-  }
-}
