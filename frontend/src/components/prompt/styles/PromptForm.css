@@ -220,3 +220,101 @@ select:focus {
       #7A5CFF);
   opacity: 0.6;
 }
+
+/* ============================= */
+/* Tablet */
+@media (max-width: 1024px) {
+
+  .prompt-form-page {
+    width: calc(100vw - 40px);
+    padding: 30px 20px;
+  }
+
+  .prompt-form {
+    max-width: 600px;
+    padding: 30px;
+  }
+
+  .prompt-form-navigation {
+    margin-left: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+}
+
+/* ============================= */
+/* Mobile */
+@media (max-width: 768px) {
+
+  .prompt-form-page {
+    width: calc(100vw - 30px);
+    margin-top: 80px;
+    padding: 20px;
+  }
+
+  .prompt-form-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Hide back button on mobile */
+  .prompt-form-header .back-button {
+    display: none;
+  }
+
+  .prompt-form-header-text h1 {
+    font-size: 26px;
+  }
+
+  .prompt-form-header-text p {
+    font-size: 13px;
+  }
+
+  .prompt-form {
+    max-width: 100%;
+    padding: 24px;
+  }
+
+  .prompt-form-navigation {
+    margin-left: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+
+}
+
+/* ============================= */
+/* Small Phones */
+@media (max-width: 480px) {
+
+  .prompt-form-page {
+    padding: 16px;
+  }
+
+  .prompt-form {
+    padding: 20px;
+  }
+
+  .prompt-form-header-text h1 {
+    font-size: 22px;
+  }
+
+  textarea {
+    min-height: 100px;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .prompt-page-header .back-button {
+    display: none;
+  }
+}
