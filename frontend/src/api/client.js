@@ -1,4 +1,4 @@
-const BASE_URL = 'https://fuzzy-fortnight-5g6rw9p9vgqwfvg4x-8000.app.github.dev';
+const BASE_URL = 'http://localhost:8000';
 
 async function fetchWrapper(url, options = {}) {
   try {
