@@ -1,21 +1,30 @@
 .home-container {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+
   background-image: url('../../../assets/PromptLabHomeBackground.png');
   background-size: cover;
+  background-position: center;
+  text-align: center;
 }
+
+/* Desktop Titles */
 
 .home-title-first {
   background: linear-gradient(90deg, #F3A6C6, #E88BB8);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
   font-size: 6rem;
-  margin-top: 220px;
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .home-title-second {
@@ -23,9 +32,9 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
   font-size: 8rem;
-  margin-top: 0px;
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .home-sub-title {
@@ -33,6 +42,8 @@
   font-size: 1.5rem;
   margin-top: 20px;
 }
+
+/* Buttons */
 
 .button-group {
   display: flex;
@@ -42,12 +53,74 @@
 
 .action-button {
   background: linear-gradient(135deg, #7B61FF, #8E6BFF);
-  ;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 24px;
   font-size: 1.2rem;
   font-weight: bold;
   border: none;
   border-radius: 10px;
   cursor: pointer;
+}
+
+/* ---------------------- */
+/* Tablet */
+@media (max-width: 1024px) {
+
+  .home-title-first {
+    font-size: 4rem;
+  }
+
+  .home-title-second {
+    font-size: 5.5rem;
+  }
+
+  .home-sub-title {
+    font-size: 1.3rem;
+  }
+}
+
+/* ---------------------- */
+/* Mobile */
+@media (max-width: 768px) {
+
+  .home-title-first {
+    font-size: 2.8rem;
+  }
+
+  .home-title-second {
+    font-size: 3.5rem;
+  }
+
+  .home-sub-title {
+    font-size: 1rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .action-button {
+    width: 100%;
+    font-size: 1rem;
+  }
+}
+
+/* ---------------------- */
+/* Small phones */
+@media (max-width: 480px) {
+
+  .home-title-first {
+    font-size: 2.2rem;
+  }
+
+  .home-title-second {
+    font-size: 2.8rem;
+  }
+
+  .home-sub-title {
+    font-size: 0.9rem;
+  }
+
 }
