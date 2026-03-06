@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Header from './Header';
 import Sidebar from './Sidebar';
-import './styles/Layout.css';
 import { Outlet } from 'react-router-dom';
 
 const Layout = () => {

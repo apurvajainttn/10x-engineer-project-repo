@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url('../../assets/PromptLabHomeBackground.png');
+  background-image: url('../../../assets/PromptLabHomeBackground.png');
   background-size: cover;
 }
 
