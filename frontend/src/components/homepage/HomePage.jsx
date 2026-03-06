@@ -1,14 +1,13 @@
 import React from 'react';
 import Button from '../../components/utils/Button'
-import './HomePage.css';
+import './styles/HomePage.css';
 import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleCreatePromptClick = () => {
-    // Replace with actual navigation logic to open the Prompt Form
     navigate(`/create-prompt`);
   };
 

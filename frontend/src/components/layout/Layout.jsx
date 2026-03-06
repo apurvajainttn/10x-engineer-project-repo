@@ -11,7 +11,7 @@ const Layout = () => {
     setSidebarVisible(!isSidebarVisible);
   };
 
-   const closeSidebar = () => {
+  const closeSidebar = () => {
     setSidebarVisible(false);
   };
 

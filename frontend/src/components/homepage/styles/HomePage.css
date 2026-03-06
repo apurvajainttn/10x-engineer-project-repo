@@ -41,7 +41,8 @@
 }
 
 .action-button {
-  background: linear-gradient(135deg, #7B61FF, #8E6BFF);;
+  background: linear-gradient(135deg, #7B61FF, #8E6BFF);
+  ;
   color: white;
   padding: 10px 20px;
   font-size: 1.2rem;

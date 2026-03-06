@@ -1,19 +1,13 @@
 .prompt-detail-page {
-
   width: calc(100vw - 120px);
   min-height: calc(100vh - 80px);
-
   margin-top: 60px;
   padding: 40px 60px;
-
-  background: linear-gradient(
-    135deg,
-    #efe9ff 0%,
-    #e8f0ff 40%,
-    #f7e9ff 70%,
-    #fff2f7 100%
-  );
-
+  background: linear-gradient(135deg,
+      #efe9ff 0%,
+      #e8f0ff 40%,
+      #f7e9ff 70%,
+      #fff2f7 100%);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -22,35 +16,26 @@
 /* Glass card */
 
 .prompt-detail-card {
-
   width: 900px;
-
   padding: 40px;
-
   border-radius: 20px;
-
-  background: rgba(255,255,255,0.7);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(12px);
-
   box-shadow:
-    0 12px 30px rgba(0,0,0,0.06),
-    0 0 0 1px rgba(255,255,255,0.4) inset;
+    0 12px 30px rgba(0, 0, 0, 0.06),
+    0 0 0 1px rgba(255, 255, 255, 0.4) inset;
 }
 
 /* Title */
 
 .prompt-title {
-
   font-size: 28px;
   margin: 0;
-
-  background: linear-gradient(
-    90deg,
-    #4FC3E6,
-    #6C7BFF,
-    #7A5CFF
-  );
-
+  background: linear-gradient(90deg,
+      #4FC3E6,
+      #6C7BFF,
+      #7A5CFF);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -58,64 +43,48 @@
 /* Description */
 
 .prompt-description {
-
   font-size: 15px;
   color: #6b6b7a;
-
   margin-bottom: 10px;
 }
 
 .prompt-content-box pre {
-
   white-space: pre-wrap;
   font-family: monospace;
-
   color: #333;
 }
 
 /* Tags */
 
 .prompt-tags {
-
   display: flex;
   align-items: center;
   gap: 8px;
-
   flex-wrap: wrap;
 }
 
 .tag-label {
-
   font-weight: 500;
   color: #6b6b7a;
 }
 
 .tag {
-
   padding: 5px 10px;
-
   border-radius: 10px;
-
   font-size: 12px;
-
-  background: rgba(108,123,255,0.12);
+  background: rgba(108, 123, 255, 0.12);
   color: #6C7BFF;
-
   font-weight: 500;
 }
 
 .prompt-detail-header {
-
   position: relative;
-
   display: flex;
   align-items: flex-start;
-
   margin-bottom: 30px;
 }
 
 .prompt-detail-header .back-button {
-
   position: absolute;
   left: 0;
   top: 0;
@@ -123,79 +92,57 @@
 }
 
 .header-text h1 {
-
   font-size: 32px;
   font-weight: 700;
-
-  background: linear-gradient(
-    90deg,
-    #4FC3E6,
-    #6C7BFF,
-    #7A5CFF
-  );
-
+  background: linear-gradient(90deg,
+      #4FC3E6,
+      #6C7BFF,
+      #7A5CFF);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-
   margin-bottom: 5px;
 }
 
 .header-text p {
-
   font-size: 14px;
   color: #6b6b7a;
 }
 
 .header-text {
-
   width: 100%;
   text-align: center;
 }
 
 .header-text::after {
-
   content: "";
   display: block;
-
   width: 120px;
   height: 4px;
-
   margin: 14px auto 0;
-
   border-radius: 2px;
-
-  background: linear-gradient(
-    90deg,
-    #4FC3E6,
-    #6C7BFF,
-    #7A5CFF
-  );
-
+  background: linear-gradient(90deg,
+      #4FC3E6,
+      #6C7BFF,
+      #7A5CFF);
   opacity: 0.6;
 }
 
 .prompt-detail-page {
-
   width: calc(100vw - 120px);
   min-height: calc(100vh - 80px);
-
   margin-top: 60px;
   padding: 40px 60px;
-
-  background: linear-gradient(
-    135deg,
-    #efe9ff 0%,
-    #e8f0ff 40%,
-    #f7e9ff 70%,
-    #fff2f7 100%
-  );
+  background: linear-gradient(135deg,
+      #efe9ff 0%,
+      #e8f0ff 40%,
+      #f7e9ff 70%,
+      #fff2f7 100%);
 }
 
 .prompt-detail-container {
-
   max-width: 900px;
   margin: 0 auto;
-
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -209,13 +156,9 @@
 }
 
 .field-label {
-
   font-size: 12px;
   font-weight: 600;
-
   text-transform: uppercase;
   letter-spacing: 0.6px;
-
   color: #7a7a8c;
-
 }

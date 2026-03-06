@@ -1,41 +1,38 @@
 .collection-list {
-    width: calc(100vw - 120px);
-    min-height: calc(100vh - 80px);
-    margin-top: 60px;
-    padding: 40px 60px;
-    position: relative;
-    z-index: 2;
-    background: linear-gradient(135deg,
-            #efe9ff 0%,
-            #e8f0ff 40%,
-            #f7e9ff 70%,
-            #fff2f7 100%);
+  width: calc(100vw - 120px);
+  min-height: calc(100vh - 80px);
+  margin-top: 60px;
+  padding: 40px 60px;
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(135deg,
+      #efe9ff 0%,
+      #e8f0ff 40%,
+      #f7e9ff 70%,
+      #fff2f7 100%);
 }
 
 .collection-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 250px));
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 250px));
+  gap: 20px;
 }
 
 .no-collections-message {
-    margin-top: 40px;
-    font-size: 16px;
-    color: #6b6b7a;
-    text-align: center;
+  margin-top: 40px;
+  font-size: 16px;
+  color: #6b6b7a;
+  text-align: center;
 }
 
 .collection-page-header {
-   position: relative;
-
+  position: relative;
   display: flex;
   align-items: flex-start;
-
   margin-bottom: 30px;
 }
 
 .collection-page-header .back-button {
-
   position: absolute;
   left: 0;
   top: 0;
@@ -43,61 +40,44 @@
 }
 
 .header-center h1 {
-
   font-size: 32px;
   font-weight: 700;
-
-  background: linear-gradient(
-    90deg,
-    #4FC3E6,
-    #6C7BFF,
-    #7A5CFF
-  );
-
+  background: linear-gradient(90deg,
+      #4FC3E6,
+      #6C7BFF,
+      #7A5CFF);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-
   margin-bottom: 5px;
 }
 
 .header-center p {
-
   font-size: 14px;
   color: #6b6b7a;
 }
 
 .header-center {
-
   width: 100%;
   text-align: center;
 }
 
 .header-center::after {
-
   content: "";
   display: block;
-
   width: 120px;
   height: 4px;
-
   margin: 14px auto 0;
-
   border-radius: 2px;
-
-  background: linear-gradient(
-    90deg,
-    #4FC3E6,
-    #6C7BFF,
-    #7A5CFF
-  );
-
+  background: linear-gradient(90deg,
+      #4FC3E6,
+      #6C7BFF,
+      #7A5CFF);
   opacity: 0.6;
 }
 
 .toolbar1 {
-
   display: flex;
   justify-content: flex-start;
-
   margin-bottom: 30px;
 }

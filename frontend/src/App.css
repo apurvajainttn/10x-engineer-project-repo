@@ -1,13 +1,21 @@
-body, html, #root {
+body,
+html,
+#root {
   height: 100%;
-  margin: 0; /* Remove default margin/padding */
+  margin: 0;
+  /* Remove default margin/padding */
 }
 
 .welcome-heading {
-  font-size: 2rem; /* Adjust the size as needed */
-  color: #ffffff; /* White color text */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adds a shadow effect */
-  margin-top: 20vh; /* Centers heading vertically a bit */
-  font-weight: bold; /* Bold text */
+  font-size: 2rem;
+  /* Adjust the size as needed */
+  color: #ffffff;
+  /* White color text */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  /* Adds a shadow effect */
+  margin-top: 20vh;
+  /* Centers heading vertically a bit */
+  font-weight: bold;
+  /* Bold text */
   text-align: center;
 }

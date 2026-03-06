@@ -1,23 +1,18 @@
 .prompt-card {
   padding: 24px;
   border-radius: 18px;
-
-  background: rgba(255,255,255,0.65);
+  background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(12px);
-
   box-shadow:
-    0 10px 25px rgba(0,0,0,0.05),
-    0 0 0 1px rgba(255,255,255,0.4) inset;
-
+    0 10px 25px rgba(0, 0, 0, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.4) inset;
   transition: all 0.25s ease;
-
   cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
   align-items: center;
-
   min-height: 150px;
 }
 
@@ -25,7 +20,7 @@
 .prompt-card:hover {
   transform: translateY(-6px);
   box-shadow:
-    0 20px 40px rgba(108,123,255,0.18);
+    0 20px 40px rgba(108, 123, 255, 0.18);
 }
 
 /* Prompt title */
@@ -33,8 +28,7 @@
   font-size: 18px;
   margin-bottom: 8px;
   font-weight: 600;
-
-  background: linear-gradient(90deg,#4FC3E6,#6C7BFF,#7A5CFF);
+  background: linear-gradient(90deg, #4FC3E6, #6C7BFF, #7A5CFF);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -49,36 +43,26 @@
 }
 
 .view-details-button {
-
   margin-top: 10px;
-
-  background: linear-gradient(
-    135deg,
-    #4FC3E6,
-    #6C7BFF
-  );
-
+  background: linear-gradient(135deg,
+      #4FC3E6,
+      #6C7BFF);
   color: white;
-
   border-radius: 10px;
   padding: 8px 16px;
   font-size: 13px;
 }
 
 .view-details-button:hover {
-
   transform: translateY(-1px);
-
   box-shadow:
-    0 6px 16px rgba(108,123,255,0.35);
+    0 6px 16px rgba(108, 123, 255, 0.35);
 }
 
 .prompt-card-secondary-actions {
-
   display: flex;
   justify-content: center;
   gap: 12px;
-
   margin-top: 14px;
 }
 
@@ -86,12 +70,12 @@
   width: 36px;
   height: 36px;
   border-radius: 12px;
-  border: 1px solid rgba(108,123,255,0.18);
+  border: 1px solid rgba(108, 123, 255, 0.18);
   align-items: center;
   justify-content: center;
-  padding: 0; 
+  padding: 0;
   cursor: pointer;
-  background: rgba(108,123,255,0.08);
+  background: rgba(108, 123, 255, 0.08);
   transition: all 0.2s ease;
 }
 
@@ -106,11 +90,11 @@
 }
 
 .edit-icon-button:hover {
-  background: rgba(108,123,255,0.16);
+  background: rgba(108, 123, 255, 0.16);
 }
 
 .delete-icon-button:hover {
-  background: rgba(255,80,80,0.16);
+  background: rgba(255, 80, 80, 0.16);
 }
 
 .delete-icon-button {
@@ -118,38 +102,23 @@
 }
 
 .icon-button::after {
-
   content: attr(data-tooltip);
-
   position: absolute;
-
   bottom: -30px;
-
-  background: rgba(30,30,40,0.9);
-
+  background: rgba(30, 30, 40, 0.9);
   color: white;
-
   font-size: 12px;
-
   padding: 4px 8px;
-
   border-radius: 6px;
-
   white-space: nowrap;
-
   opacity: 0;
-
   transform: translateY(-4px);
-
   transition: all 0.15s ease;
-
   pointer-events: none;
 }
 
 .icon-button:hover::after {
-
   opacity: 1;
-
   transform: translateY(0);
 }
 

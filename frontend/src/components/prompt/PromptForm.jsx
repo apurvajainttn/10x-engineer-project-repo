@@ -12,9 +12,9 @@ const PromptForm = ({ initialData = {}, isEditing = false }) => {
     content: initialData.content || '',
     description: initialData.description || '',
     tags: initialData.tags || [],
-    collection_id: initialData.collection_id || '',  // Adding collection_id
+    collection_id: initialData.collection_id || ''
   });
-  const [collections, setCollections] = useState([]);  // Ensure collections is always an array
+  const [collections, setCollections] = useState([]);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
 
