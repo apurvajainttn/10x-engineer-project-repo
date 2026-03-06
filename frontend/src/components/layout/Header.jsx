@@ -2,6 +2,7 @@ import React from 'react';
 import './styles/Header.css';
 import PromptLabLogo from '../../assets/PromptLabLogo.png';
 import { useNavigate } from 'react-router-dom';
+import Button from '../utils/Button';
 
 const Header = ({ onToggleSidebar }) => {
   const navigate = useNavigate();
@@ -13,9 +14,9 @@ const Header = ({ onToggleSidebar }) => {
   return (
     <header className="app-header">
       <div className="header-left">
-        <button className="menu-toggle" onClick={onToggleSidebar}>
+        <Button className="menu-toggle" onClick={onToggleSidebar}>
           ☰
-        </button>
+        </Button>
         <div className="logo" onClick={redirectToHome} style={{ cursor: 'pointer' }}>
           <img src={PromptLabLogo} alt="PromptLab Logo" className="header-logo" />
         </div>

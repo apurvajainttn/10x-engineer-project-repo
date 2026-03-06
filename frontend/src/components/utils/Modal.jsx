@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from './Button';
 
 const Modal = ({ isVisible, onClose, children }) => {
   if (!isVisible) return null;
@@ -6,9 +7,9 @@ const Modal = ({ isVisible, onClose, children }) => {
   return (
     <div className="modal-overlay">
       <div className="modal">
-        <button className="modal-close" onClick={onClose}>
+        <Button className="modal-close" onClick={onClose}>
           &times;
-        </button>
+        </Button>
         <div className="modal-content">
           {children}
         </div>

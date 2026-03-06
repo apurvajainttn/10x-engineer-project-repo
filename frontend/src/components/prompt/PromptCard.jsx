@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './styles/PromptCard.css'
+import Button from '../utils/Button';
 
 const PromptCard = ({ prompt, onDelete }) => {
   const navigate = useNavigate();
@@ -28,13 +29,13 @@ const PromptCard = ({ prompt, onDelete }) => {
       <p>{prompt.description}</p>
 
       <div className="prompt-card-buttons">
-        <button onClick={handleEditClick} className="edit-button">
+        <Button onClick={handleEditClick} className="edit-button">
           Edit
-        </button>
+        </Button>
 
-        <button onClick={handleDeleteClick} className="delete-button">
+        <Button onClick={handleDeleteClick} className="delete-button">
           Delete
-        </button>
+        </Button>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles/CollectionCard.css';
+import Button from '../utils/Button';
 
 const CollectionCard = ({ collection, onDelete }) => {
 
@@ -23,9 +24,9 @@ const CollectionCard = ({ collection, onDelete }) => {
       <p>{collection.description}</p>
 
       <div className="collection-card-buttons">
-        <button onClick={handleDeleteClick} className="delete-button">
+        <Button onClick={handleDeleteClick} className="delete-button">
           Delete
-        </button>
+        </Button>
       </div>
 
     </div>

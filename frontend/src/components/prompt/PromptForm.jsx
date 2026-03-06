@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { createPrompt, updatePrompt } from '../../api/prompts';
 import { getCollections } from '../../api/collections';
+import './styles/PromptForm.css'
+import Button from '../utils/Button';
 
 const PromptForm = ({ initialData = {}, isEditing = false }) => {
   const [formData, setFormData] = useState({
@@ -51,16 +53,26 @@ const PromptForm = ({ initialData = {}, isEditing = false }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.title.length < 1 || formData.title.length > 200) {
-      alert('Title must be between 1 and 200 characters');
-      return;
-    }
-    if (formData.content.length < 1) {
-      alert('Content must not be empty');
+
+    if (!formData.title.trim()) {
+      setError("Title is required.");
       return;
     }
 
-    console.log('Apurva_Test Submitting form data:', formData);
+    if (!formData.content.trim()) {
+      setError("Content is required.");
+      return;
+    }
+
+    if (!formData.description.trim()) {
+      setError("Description is required.");
+      return;
+    }
+
+    if (formData.title.length > 200) {
+      setError("Title must be less than 200 characters.");
+      return;
+    }
 
     try {
       if (isEditing) {
@@ -70,10 +82,12 @@ const PromptForm = ({ initialData = {}, isEditing = false }) => {
         await createPrompt(formData);
         setSuccessMessage(`Prompt "${formData.title}" has been created successfully!`);
       }
+
       setError(null);
+
     } catch (err) {
-      console.error("Error:", err);
-      setError('Failed to process prompt. Please try again.');
+      console.log("Error in submitting form", err)
+      setError("Failed to process prompt. Please try again.");
       setSuccessMessage('');
     }
   };
@@ -87,69 +101,97 @@ const PromptForm = ({ initialData = {}, isEditing = false }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="prompt-form">
-      {error && <div className="error-message">{error}</div>}
-      <div>
-        <label htmlFor="title">Title</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-          required
-          minLength={1}
-          maxLength={200}
-        />
+    <div className="prompt-form-page">
+
+      <div className="form-header">
+        <h1>{isEditing ? "Edit Prompt" : "Create New Prompt"}</h1>
+        <p>Create reusable prompts for your AI workflows</p>
       </div>
-      <div>
-        <label htmlFor="content">Content</label>
-        <textarea
-          id="content"
-          name="content"
-          value={formData.content}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="description">Description</label>
-        <textarea
-          id="description"
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          maxLength={500}
-        />
-      </div>
-      <div>
-        <label htmlFor="tags">Tags (comma-separated)</label>
-        <input
-          type="text"
-          id="tags"
-          name="tags"
-          value={formData.tags.join(', ')}
-          onChange={handleTagsChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="collection">Collection (optional)</label>
-        <select
-          id="collection"
-          name="collection_id"
-          value={formData.collection_id}
-          onChange={handleChange}
-        >
-          <option value="">No Collection</option>
-          {collections.map(collection => (
-            <option key={collection.id} value={collection.id}>
-              {collection.name}
-            </option>
-          ))}
-        </select>
-      </div>
-      <button type="submit">{isEditing ? 'Update' : 'Create'} Prompt</button>
-    </form>
+
+      <form onSubmit={handleSubmit} className="prompt-form">
+
+        <p className="required-note">Fields marked with * are required</p>
+
+        {error && <div className="error-message">{error}</div>}
+
+        <div className="form-group">
+          <label htmlFor="title">
+            Title <span className="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            required
+            minLength={1}
+            maxLength={200}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="content">
+            Content <span className="required">*</span>
+          </label>
+          <textarea
+            id="content"
+            name="content"
+            value={formData.content}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="description">
+            Description <span className="required">*</span>
+          </label>
+          <textarea
+            id="description"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            required
+            maxLength={500}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="tags">Tags</label>
+          <input
+            type="text"
+            id="tags"
+            name="tags"
+            value={formData.tags.join(', ')}
+            onChange={handleTagsChange}
+            placeholder="ai, marketing, coding"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="collection">Collection</label>
+          <select
+            id="collection"
+            name="collection_id"
+            value={formData.collection_id}
+            onChange={handleChange}
+          >
+            <option value="">No Collection</option>
+            {collections.map(collection => (
+              <option key={collection.id} value={collection.id}>
+                {collection.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <Button className="submit-button" type="submit">
+          {isEditing ? "Update Prompt" : "Create Prompt"}
+        </Button>
+
+      </form>
+    </div>
   );
 };
 

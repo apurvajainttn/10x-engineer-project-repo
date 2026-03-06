@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { createCollection } from '../../api/collections'; // Import the API function for creating collection
+import './styles/CollectionForm.css'
+import Button from '../utils/Button';
 
 const CollectionForm = () => {
   // State for form fields, success, and error handling
@@ -57,7 +59,7 @@ const CollectionForm = () => {
           maxLength={500}
         />
       </div>
-      <button type="submit">Create Collection</button>
+      <Button type="submit">Create Collection</Button>
     </form>
   );
 };
