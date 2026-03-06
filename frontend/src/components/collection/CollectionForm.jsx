@@ -1,27 +1,31 @@
 import React, { useState } from 'react';
-import { createCollection } from '../../api/collections'; // Import the API function for creating collection
-import './styles/CollectionForm.css'
+import { createCollection } from '../../api/collections';
+import './styles/CollectionForm.css';
 import Button from '../utils/Button';
+import SuccessCard from '../utils/SuccessCard';
 
 const CollectionForm = () => {
-  // State for form fields, success, and error handling
+
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       await createCollection({ name, description });
+
       setSuccessMessage(`Collection "${name}" has been created successfully!`);
+
       setName('');
       setDescription('');
       setError(null);
+
     } catch (err) {
-      console.error("Error:", err);
+      console.error(err);
       setError('Failed to create collection. Please try again.');
       setSuccessMessage('');
     }
@@ -29,38 +33,59 @@ const CollectionForm = () => {
 
   if (successMessage) {
     return (
-      <div className="success-message">
-        {successMessage}
-      </div>
+      <SuccessCard
+        title="Collection Created"
+        message={successMessage}
+      />
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="collection-form">
-      {error && <div className="error-message">{error}</div>}
-      <div>
-        <label htmlFor="collection-name">Collection Name</label>
-        <input
-          type="text"
-          id="collection-name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-          minLength={1}
-          maxLength={100}
-        />
+    <div className="collection-form-page">
+
+      <div className="form-header">
+        <h1>Create Collection</h1>
+        <p>Organize your prompts into collections</p>
       </div>
-      <div>
-        <label htmlFor="collection-description">Description</label>
-        <textarea
-          id="collection-description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          maxLength={500}
-        />
-      </div>
-      <Button type="submit">Create Collection</Button>
-    </form>
+
+      <form onSubmit={handleSubmit} className="collection-form">
+
+        {error && <div className="error-message">{error}</div>}
+
+        <div className="form-group">
+          <label htmlFor="collection-name">
+            Collection Name <span className="required">*</span>
+          </label>
+
+          <input
+            type="text"
+            id="collection-name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            maxLength={100}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="collection-description">
+            Description <span className="required">*</span>
+          </label>
+
+          <textarea
+            id="collection-description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+            maxLength={500}
+          />
+        </div>
+
+        <Button className="submit-button" type="submit">Create Collection</Button>
+
+      </form>
+
+    </div>
   );
 };
 

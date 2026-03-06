@@ -179,23 +179,6 @@ select:focus {
   font-size: 14px;
 }
 
-/* Success */
-
-.success-message {
-
-  text-align: center;
-
-  background: rgba(120, 255, 180, 0.15);
-
-  padding: 14px;
-
-  border-radius: 10px;
-
-  color: #2c7a55;
-
-  font-size: 15px;
-}
-
 .required-note {
   font-size: 13px;
   color: #6b6b7a;

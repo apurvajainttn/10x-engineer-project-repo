@@ -3,6 +3,7 @@ import { createPrompt, updatePrompt } from '../../api/prompts';
 import { getCollections } from '../../api/collections';
 import './styles/PromptForm.css'
 import Button from '../utils/Button';
+import SuccessCard from '../utils/SuccessCard';
 
 const PromptForm = ({ initialData = {}, isEditing = false }) => {
   const [formData, setFormData] = useState({
@@ -54,21 +55,6 @@ const PromptForm = ({ initialData = {}, isEditing = false }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.title.trim()) {
-      setError("Title is required.");
-      return;
-    }
-
-    if (!formData.content.trim()) {
-      setError("Content is required.");
-      return;
-    }
-
-    if (!formData.description.trim()) {
-      setError("Description is required.");
-      return;
-    }
-
     if (formData.title.length > 200) {
       setError("Title must be less than 200 characters.");
       return;
@@ -94,9 +80,10 @@ const PromptForm = ({ initialData = {}, isEditing = false }) => {
 
   if (successMessage) {
     return (
-      <div className="success-message">
-        {successMessage}
-      </div>
+      <SuccessCard
+        title={isEditing ? "Prompt Updated" : "Prompt Created"}
+        message={successMessage}
+      />
     );
   }
 
