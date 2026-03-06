@@ -1,8 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import './styles/PromptCard.css'
 
 const PromptCard = ({ prompt, onDelete }) => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleDeleteClick = (e) => {
     e.stopPropagation(); // Prevent card click from triggering on delete
@@ -25,8 +26,16 @@ const PromptCard = ({ prompt, onDelete }) => {
     <div className="prompt-card" onClick={handleCardClick}>
       <h2>{prompt.title}</h2>
       <p>{prompt.description}</p>
-      <button onClick={handleEditClick} className="edit-button">Edit</button>
-      <button onClick={handleDeleteClick} className="delete-button">Delete</button>
+
+      <div className="prompt-card-buttons">
+        <button onClick={handleEditClick} className="edit-button">
+          Edit
+        </button>
+
+        <button onClick={handleDeleteClick} className="delete-button">
+          Delete
+        </button>
+      </div>
     </div>
   );
 };

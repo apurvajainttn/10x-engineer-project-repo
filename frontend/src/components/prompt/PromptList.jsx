@@ -4,6 +4,7 @@ import { getCollections } from '../../api/collections'; // Import collections AP
 import PromptCard from './PromptCard';
 import LoadingSpinner from '../utils/LoadingSpinner';
 import ErrorMessage from '../utils/ErrorMessage';
+import './styles/PromptList.css'
 
 const PromptList = () => {
   const [prompts, setPrompts] = useState([]);
@@ -87,9 +88,15 @@ const PromptList = () => {
       {filteredPrompts.length === 0 && !successMessage ? (
         <div className="no-prompts-message">No prompts found.</div>
       ) : (
-        filteredPrompts.map((prompt) => (
-          <PromptCard key={prompt.id} prompt={prompt} onDelete={handleDelete} />
-        ))
+        <div className="prompt-grid">
+          {filteredPrompts.map((prompt) => (
+            <PromptCard
+              key={prompt.id}
+              prompt={prompt}
+              onDelete={handleDelete}
+            />
+          ))}
+        </div>
       )}
     </div>
   );

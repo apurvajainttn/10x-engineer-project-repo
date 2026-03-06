@@ -1,0 +1,75 @@
+/* PromptList.css */
+
+.prompt-list {
+  width: calc(100vw - 120px);
+  min-height: calc(100vh - 80px);
+  margin-top: 80px;  
+  padding: 40px 60px;
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(
+    135deg,
+    #efe9ff 0%,
+    #e8f0ff 40%,
+    #f7e9ff 70%,
+    #fff2f7 100%
+  );
+}
+
+.prompt-grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(250px, 250px));
+
+  gap: 20px;
+}
+
+/* Filter Section */
+.collection-filter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  font-weight: 500;
+  color: #5b5b6a;
+}
+
+.collection-filter label {
+  font-size: 14px;
+}
+
+.collection-filter select {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px);
+
+  font-size: 14px;
+  color: #4a4a5a;
+  cursor: pointer;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* No prompts message */
+.no-prompts-message {
+  margin-top: 40px;
+  font-size: 16px;
+  color: #6b6b7a;
+  text-align: center;
+}
+
+/* Success message */
+.success-message {
+  margin-bottom: 20px;
+  padding: 12px 18px;
+  border-radius: 10px;
+
+  background: rgba(120, 255, 180, 0.15);
+  color: #2c7a55;
+
+  font-size: 14px;
+}
