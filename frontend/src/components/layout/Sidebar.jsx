@@ -21,7 +21,7 @@ const Sidebar = ({ isVisible, onClose }) => {
       <nav className="sidebar-navigation">
         <ul>
           <li><Link to="/" onClick={handleLinkClick}><img src={homeIcon} width={24} height={24} alt="Home Icon"/>Home</Link></li>
-          <li><Link to="/dashboard" onClick={handleLinkClick}><img src={viewPromptsIcon} width={24} height={24}/>View All Prompts</Link></li>
+          <li><Link to="/list-prompts" onClick={handleLinkClick}><img src={viewPromptsIcon} width={24} height={24}/>View All Prompts</Link></li>
           <li><Link to="/create-prompt" onClick={handleLinkClick}><img src={createPromptIcon} width={24} height={24}/>Create New Prompt</Link></li>
           <li><Link to="/list-collections" onClick={handleLinkClick}><img src={listCollectionsIcon} width={24} height={24}/>View All Collections</Link></li>
           <li><Link to="/create-collections" onClick={handleLinkClick}><img src={createCollectionIcon} width={24} height={24}/>Create New Collection</Link></li>

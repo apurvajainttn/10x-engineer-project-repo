@@ -1,0 +1,38 @@
+/* .back-button {
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 8px 14px;
+
+  border-radius: 10px;
+  border: none;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,0.06),
+    0 4px 10px rgba(0,0,0,0.04);
+
+  transition: all 0.2s ease;
+
+  color: #4a4a5a;
+}
+
+.back-button:hover {
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(108,123,255,0.35),
+    0 6px 14px rgba(108,123,255,0.18);
+
+  color: #6C7BFF;
+} */

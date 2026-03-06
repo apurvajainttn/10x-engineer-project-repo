@@ -13,8 +13,7 @@ const HomePage = () => {
   };
 
   const handleListPromptsClick = () => {
-    // Replace with actual navigation logic to open the Prompt List
-    navigate(`/dashboard`);
+    navigate(`/list-prompts`);
   };
 
   return (

@@ -37,6 +37,7 @@ const CollectionForm = () => {
       <SuccessCard
         title="Collection Created"
         message={successMessage}
+        redirectTo="/list-collections"
       />
     );
   }

@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="dashboard" element={<PromptList />} />
+          <Route path="list-prompts" element={<PromptList />} />
           <Route path="create-prompt" element={<PromptForm />} />
           <Route path="edit-prompt/:id" element={<EditPrompt />} />
           <Route path="create-collections" element={<CollectionForm />} />
