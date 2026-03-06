@@ -128,3 +128,106 @@
 .back-button {
   margin-bottom: 24px;
 }
+
+/* ============================= */
+/* Tablet */
+@media (max-width: 1024px) {
+
+  .prompt-list {
+    width: calc(100vw - 40px);
+    padding: 30px 20px;
+  }
+
+  .prompt-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+
+}
+
+
+/* ============================= */
+/* Mobile */
+@media (max-width: 768px) {
+
+  .prompt-list {
+    width: calc(100vw - 30px);
+    margin-top: 60px;
+    padding: 20px;
+  }
+
+  .prompt-page-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .prompt-page-header .back-button {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    margin-top: 0;
+    z-index: 5;
+  }
+
+  .header-center h1 {
+    font-size: 26px;
+  }
+
+  .header-center p {
+    font-size: 13px;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .collection-filter {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .collection-filter select {
+    flex: 1;
+  }
+
+  .prompt-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+}
+
+
+/* ============================= */
+/* Small Phones */
+@media (max-width: 480px) {
+
+  .prompt-list {
+    padding: 16px;
+  }
+
+  .header-center h1 {
+    font-size: 22px;
+  }
+
+  .prompt-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .collection-filter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .collection-filter select {
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .prompt-page-header .back-button {
+    display: none;
+  }
+}
