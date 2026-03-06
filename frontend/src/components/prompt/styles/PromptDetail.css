@@ -1,0 +1,124 @@
+.prompt-detail-page {
+
+  width: calc(100vw - 120px);
+  min-height: calc(100vh - 80px);
+
+  margin-top: 60px;
+  padding: 40px 60px;
+
+  background: linear-gradient(
+    135deg,
+    #efe9ff 0%,
+    #e8f0ff 40%,
+    #f7e9ff 70%,
+    #fff2f7 100%
+  );
+
+  display: flex;
+  justify-content: center;
+}
+
+/* Glass card */
+
+.prompt-detail-card {
+
+  width: 900px;
+
+  padding: 40px;
+
+  border-radius: 20px;
+
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.06),
+    0 0 0 1px rgba(255,255,255,0.4) inset;
+}
+
+/* Title */
+
+.prompt-title {
+
+  font-size: 36px;
+  margin-bottom: 10px;
+
+  background: linear-gradient(
+    90deg,
+    #4FC3E6,
+    #6C7BFF,
+    #7A5CFF
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Description */
+
+.prompt-description {
+
+  font-size: 15px;
+  color: #6b6b7a;
+
+  margin-bottom: 25px;
+}
+
+/* Prompt content */
+
+.prompt-content-box {
+
+  background: rgba(255,255,255,0.85);
+
+  border-radius: 14px;
+
+  padding: 20px;
+
+  font-size: 14px;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,0.06);
+
+  margin-bottom: 25px;
+
+  overflow-x: auto;
+}
+
+.prompt-content-box pre {
+
+  white-space: pre-wrap;
+  font-family: monospace;
+
+  color: #333;
+}
+
+/* Tags */
+
+.prompt-tags {
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  flex-wrap: wrap;
+}
+
+.tag-label {
+
+  font-weight: 500;
+  color: #6b6b7a;
+}
+
+.tag {
+
+  padding: 5px 10px;
+
+  border-radius: 10px;
+
+  font-size: 12px;
+
+  background: rgba(108,123,255,0.12);
+  color: #6C7BFF;
+
+  font-weight: 500;
+}
