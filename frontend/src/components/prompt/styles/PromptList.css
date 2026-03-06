@@ -169,6 +169,10 @@
     z-index: 5;
   }
 
+  .prompt-page-header .back-button {
+    display: none;
+  }
+
   .header-center h1 {
     font-size: 26px;
   }
@@ -224,10 +228,4 @@
     width: 100%;
   }
 
-}
-
-@media (max-width: 768px) {
-  .prompt-page-header .back-button {
-    display: none;
-  }
 }
