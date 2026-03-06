@@ -3,7 +3,7 @@
 .prompt-list {
   width: calc(100vw - 120px);
   min-height: calc(100vh - 80px);
-  margin-top: 80px;  
+  margin-top: 60px;  
   padding: 40px 60px;
   position: relative;
   z-index: 2;
@@ -43,14 +43,11 @@
   border-radius: 10px;
   border: none;
   outline: none;
-
   background: rgba(255,255,255,0.7);
   backdrop-filter: blur(10px);
-
   font-size: 14px;
   color: #4a4a5a;
   cursor: pointer;
-
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
@@ -72,4 +69,44 @@
   color: #2c7a55;
 
   font-size: 14px;
+}
+
+.page-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  background: linear-gradient(90deg,#4FC3E6,#6C7BFF,#7A5CFF);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.page-header p {
+  font-size: 14px;
+  color: #6b6b7a;
+}
+
+.page-header::after {
+  content: "";
+  display: block;
+
+  width: 120px;
+  height: 4px;
+
+  margin: 18px auto 0;
+
+  border-radius: 2px;
+
+  background: linear-gradient(
+    90deg,
+    #4FC3E6,
+    #6C7BFF,
+    #7A5CFF
+  );
+
+  opacity: 0.6;
 }

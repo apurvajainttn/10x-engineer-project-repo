@@ -70,6 +70,10 @@ const PromptList = () => {
 
   return (
     <div className="prompt-list">
+      <div className="page-header">
+        <h1>Prompt Dashboard</h1>
+        <p>Manage and organize your AI prompts</p>
+      </div>
       {successMessage && <div className="success-message">{successMessage}</div>}
 
       <div className="collection-filter">

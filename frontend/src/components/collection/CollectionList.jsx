@@ -1,9 +1,9 @@
-// frontend/src/components/collection/CollectionList.jsx
 import React, { useState, useEffect } from 'react';
-import { getCollections, deleteCollection } from '../../api/collections'; // Import collection API functions
-import CollectionCard from './CollectionCard'; // Assume CollectionCard is where individual collections are rendered
+import { getCollections, deleteCollection } from '../../api/collections';
+import CollectionCard from './CollectionCard';
 import LoadingSpinner from '../utils/LoadingSpinner';
 import ErrorMessage from '../utils/ErrorMessage';
+import './styles/CollectionList.css';
 
 const CollectionList = () => {
   const [collections, setCollections] = useState([]);
@@ -28,17 +28,15 @@ const CollectionList = () => {
   const handleDelete = async (id) => {
     try {
       const response = await deleteCollection(id);
+
       if (response.status === 204) {
         setCollections(collections.filter(collection => collection.id !== id));
         setSuccessMessage('Collection has been deleted successfully.');
+
         setTimeout(() => {
           setSuccessMessage('');
-          
-          // Clear message after 3 seconds and check if no collections left
-          if (collections.length === 0) {
-            setError({ message: 'No collections found.' });
-          }
         }, 3000);
+
       } else {
         throw new Error('Failed to delete the collection');
       }
@@ -52,14 +50,28 @@ const CollectionList = () => {
 
   return (
     <div className="collection-list">
+
+      <div className="page-header">
+        <h1>Collections</h1>
+        <p>Group prompts into collections</p>
+      </div>
+      
       {successMessage && <div className="success-message">{successMessage}</div>}
+
       {collections.length === 0 && !successMessage ? (
         <div className="no-collections-message">No collections found.</div>
       ) : (
-        collections.map(collection => (
-          <CollectionCard key={collection.id} collection={collection} onDelete={handleDelete} />
-        ))
+        <div className="collection-grid">
+          {collections.map(collection => (
+            <CollectionCard
+              key={collection.id}
+              collection={collection}
+              onDelete={handleDelete}
+            />
+          ))}
+        </div>
       )}
+
     </div>
   );
 };
