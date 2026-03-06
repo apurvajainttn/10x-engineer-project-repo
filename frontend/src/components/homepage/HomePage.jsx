@@ -12,7 +12,7 @@ const HomePage = () => {
   };
 
   const handleListPromptsClick = () => {
-    navigate(`/list-prompts`);
+    navigate(`/browse-prompts`);
   };
 
   return (
@@ -22,10 +22,10 @@ const HomePage = () => {
       <h2 className="home-sub-title">Create, list and manage your prompts with ease</h2>
       <div className="button-group">
         <Button className="action-button" onClick={handleCreatePromptClick}>
-          Create a New Prompt
+          Create Prompt
         </Button>
         <Button className="action-button" onClick={handleListPromptsClick}>
-          List Prompts
+          Browse Prompts
         </Button>
       </div>
     </div>

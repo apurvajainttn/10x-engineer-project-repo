@@ -16,11 +16,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="list-prompts" element={<PromptList />} />
+          <Route path="browse-prompts" element={<PromptList />} />
           <Route path="create-prompt" element={<PromptForm />} />
           <Route path="edit-prompt/:id" element={<EditPrompt />} />
           <Route path="create-collections" element={<CollectionForm />} />
-          <Route path="list-collections" element={<CollectionList />} />
+          <Route path="browse-collections" element={<CollectionList />} />
           <Route path="/prompt/:promptId" element={<PromptDetail />} />
           {/* Add routes for other components like PromptDetail, etc. */}
         </Route>

@@ -84,7 +84,7 @@ const PromptForm = ({ initialData = {}, isEditing = false }) => {
       <SuccessCard
         title={isEditing ? "Prompt Updated" : "Prompt Created"}
         message={successMessage}
-        redirectTo="/list-prompts"
+        redirectTo="/browse-prompts"
       />
     );
   }
