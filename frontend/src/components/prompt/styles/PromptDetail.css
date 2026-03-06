@@ -41,8 +41,8 @@
 
 .prompt-title {
 
-  font-size: 36px;
-  margin-bottom: 10px;
+  font-size: 28px;
+  margin: 0;
 
   background: linear-gradient(
     90deg,
@@ -62,27 +62,7 @@
   font-size: 15px;
   color: #6b6b7a;
 
-  margin-bottom: 25px;
-}
-
-/* Prompt content */
-
-.prompt-content-box {
-
-  background: rgba(255,255,255,0.85);
-
-  border-radius: 14px;
-
-  padding: 20px;
-
-  font-size: 14px;
-
-  box-shadow:
-    inset 0 0 0 1px rgba(0,0,0,0.06);
-
-  margin-bottom: 25px;
-
-  overflow-x: auto;
+  margin-bottom: 10px;
 }
 
 .prompt-content-box pre {
@@ -219,4 +199,23 @@
   display: flex;
   flex-direction: column;
   gap: 25px;
+}
+
+.detail-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.field-label {
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+
+  color: #7a7a8c;
+
 }

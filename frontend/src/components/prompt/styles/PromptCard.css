@@ -24,9 +24,8 @@
 /* Hover floating effect */
 .prompt-card:hover {
   transform: translateY(-6px);
-
   box-shadow:
-    0 18px 40px rgba(108,123,255,0.18);
+    0 20px 40px rgba(108,123,255,0.18);
 }
 
 /* Prompt title */
@@ -49,43 +48,115 @@
   margin-bottom: 18px;
 }
 
-/* Buttons container */
-.prompt-card-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+.view-details-button {
+
+  margin-top: 10px;
+
+  background: linear-gradient(
+    135deg,
+    #4FC3E6,
+    #6C7BFF
+  );
+
+  color: white;
+
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-size: 13px;
 }
 
-/* Buttons */
-.edit-button,
-.delete-button {
-  border: none;
-  padding: 8px 14px;
-  border-radius: 10px;
+.view-details-button:hover {
 
-  font-size: 13px;
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 16px rgba(108,123,255,0.35);
+}
+
+.prompt-card-secondary-actions {
+
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+
+  margin-top: 14px;
+}
+
+.icon-button {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  border: 1px solid rgba(108,123,255,0.18);
+  align-items: center;
+  justify-content: center;
+  padding: 0; 
   cursor: pointer;
-
+  background: rgba(108,123,255,0.08);
   transition: all 0.2s ease;
 }
 
-/* Edit button */
-.edit-button {
-  background: linear-gradient(135deg,#7B61FF,#8E6BFF);
-  color: white;
+.icon-button svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2.2;
 }
 
-.edit-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 14px rgba(123,97,255,0.3);
+.edit-icon-button {
+  color: #6C7BFF;
 }
 
-/* Delete button */
-.delete-button {
-  background: rgba(255,80,80,0.1);
+.edit-icon-button:hover {
+  background: rgba(108,123,255,0.16);
+}
+
+.delete-icon-button:hover {
+  background: rgba(255,80,80,0.16);
+}
+
+.delete-icon-button {
   color: #ff4d6d;
 }
 
-.delete-button:hover {
-  background: rgba(255,80,80,0.2);
+.icon-button::after {
+
+  content: attr(data-tooltip);
+
+  position: absolute;
+
+  bottom: -30px;
+
+  background: rgba(30,30,40,0.9);
+
+  color: white;
+
+  font-size: 12px;
+
+  padding: 4px 8px;
+
+  border-radius: 6px;
+
+  white-space: nowrap;
+
+  opacity: 0;
+
+  transform: translateY(-4px);
+
+  transition: all 0.15s ease;
+
+  pointer-events: none;
+}
+
+.icon-button:hover::after {
+
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+.icon-button:hover {
+  transform: translateY(-2px) scale(1.05);
+}
+
+.icon-button:hover svg {
+  transform: scale(1.1);
 }

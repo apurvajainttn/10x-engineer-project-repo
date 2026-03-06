@@ -50,32 +50,41 @@ const PromptDetail = () => {
 
           <div className="header-text">
             <h1>Prompt Details</h1>
-            <p>View and manage your AI prompt</p>
+            <p>View details of your AI prompt</p>
           </div>
 
         </div>
 
         <div className="prompt-detail-card">
 
-          <h2 className="prompt-title">{prompt.title}</h2>
+          <div className="detail-field">
+            <span className="field-label">Title</span>
+            <h2 className="prompt-title">{prompt.title}</h2>
+          </div>
 
-          <p className="prompt-description">{prompt.description}</p>
+          <div className="detail-field">
+            <span className="field-label">Description</span>
+            <p className="prompt-description">{prompt.description}</p>
+          </div>
 
-          <div className="prompt-content-box">
-            <pre>{prompt.content}</pre>
+          <div className="detail-field">
+            <span className="field-label">Prompt Content</span>
+            <div className="prompt-description">
+              <pre>{prompt.content}</pre>
+            </div>
           </div>
 
           {prompt.tags?.length > 0 && (
-            <div className="prompt-tags">
+            <div className="detail-field">
+              <span className="field-label">Tags</span>
 
-              <span className="tag-label">Tags:</span>
-
-              {prompt.tags.map((tag, index) => (
-                <span key={index} className="tag">
-                  {tag}
-                </span>
-              ))}
-
+              <div className="prompt-tags">
+                {prompt.tags.map((tag, index) => (
+                  <span key={index} className="tag">
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
           )}
 

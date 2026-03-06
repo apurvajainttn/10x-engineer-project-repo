@@ -56,6 +56,12 @@ const CollectionForm = () => {
 
       <form onSubmit={handleSubmit} className="collection-form">
 
+        <div className="form-section-header">
+          <h3>Collection Details</h3>
+        </div>
+
+        <p className="required-note">Fields marked with * are required</p>
+
         {error && <div className="error-message">{error}</div>}
 
         <div className="form-group">
