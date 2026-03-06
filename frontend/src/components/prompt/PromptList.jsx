@@ -5,6 +5,7 @@ import PromptCard from './PromptCard';
 import LoadingSpinner from '../utils/LoadingSpinner';
 import ErrorMessage from '../utils/ErrorMessage';
 import './styles/PromptList.css'
+import SearchBar from '../utils/SearchBar';
 
 const PromptList = () => {
   const [prompts, setPrompts] = useState([]);
@@ -13,6 +14,7 @@ const PromptList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,9 +62,19 @@ const PromptList = () => {
   };
 
   const filteredPrompts = prompts.filter((prompt) => {
-    if (selectedCollection === 'all') return true;
-    if (selectedCollection === 'none') return !prompt.collection_id;
-    return prompt.collection_id === selectedCollection;
+
+    const matchesCollection =
+      selectedCollection === 'all' ||
+      (selectedCollection === 'none' && !prompt.collection_id) ||
+      prompt.collection_id === selectedCollection;
+
+    const matchesSearch =
+      prompt.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      prompt.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      prompt.content?.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return matchesCollection && matchesSearch;
+
   });
 
   if (loading) return <LoadingSpinner />;
@@ -76,17 +88,32 @@ const PromptList = () => {
       </div>
       {successMessage && <div className="success-message">{successMessage}</div>}
 
-      <div className="collection-filter">
-        <label htmlFor="collectionSelect">Filter by Collection:</label>
-        <select id="collectionSelect" value={selectedCollection} onChange={handleCollectionChange}>
-          <option value="all">All Collections</option>
-          <option value="none">No Collection</option>
-          {collections.map((collection) => (
-            <option key={collection.id} value={collection.id}>
-              {collection.name}
-            </option>
-          ))}
-        </select>
+      <div className="toolbar">
+
+        <SearchBar
+          value={searchQuery}
+          onChange={setSearchQuery}
+          placeholder="Search prompts..."
+        />
+
+        <div className="collection-filter">
+          <label htmlFor="collectionSelect">Filter by Collection:</label>
+          <select
+            id="collectionSelect"
+            value={selectedCollection}
+            onChange={handleCollectionChange}
+          >
+            <option value="all">All Collections</option>
+            <option value="none">No Collection</option>
+
+            {collections.map((collection) => (
+              <option key={collection.id} value={collection.id}>
+                {collection.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
       </div>
 
       {filteredPrompts.length === 0 && !successMessage ? (

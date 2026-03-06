@@ -64,3 +64,11 @@
 
   opacity: 0.6;
 }
+
+.toolbar1 {
+
+  display: flex;
+  justify-content: flex-start;
+
+  margin-bottom: 30px;
+}
