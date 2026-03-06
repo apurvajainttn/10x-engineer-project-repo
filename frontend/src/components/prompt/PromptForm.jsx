@@ -4,6 +4,7 @@ import { getCollections } from '../../api/collections';
 import './styles/PromptForm.css'
 import Button from '../utils/Button';
 import SuccessCard from '../utils/SuccessCard';
+import BackButton from '../utils/BackButton';
 
 const PromptForm = ({ initialData = {}, isEditing = false }) => {
   const [formData, setFormData] = useState({
@@ -90,12 +91,21 @@ const PromptForm = ({ initialData = {}, isEditing = false }) => {
   return (
     <div className="prompt-form-page">
 
-      <div className="form-header">
-        <h1>{isEditing ? "Edit Prompt" : "Create New Prompt"}</h1>
-        <p>Create reusable prompts for your AI workflows</p>
+      <div className="prompt-form-header">
+        <BackButton />
+
+        <div className="prompt-form-header-text">
+          <h1>{isEditing ? "Edit Prompt" : "Create New Prompt"}</h1>
+          <p>Create reusable prompts for your AI workflows</p>
+        </div>
+
       </div>
 
       <form onSubmit={handleSubmit} className="prompt-form">
+
+        <div className="form-section-header">
+          <h3>Prompt Details</h3>
+        </div>
 
         <p className="required-note">Fields marked with * are required</p>
 

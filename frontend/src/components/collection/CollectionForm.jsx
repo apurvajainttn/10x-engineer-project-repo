@@ -3,6 +3,7 @@ import { createCollection } from '../../api/collections';
 import './styles/CollectionForm.css';
 import Button from '../utils/Button';
 import SuccessCard from '../utils/SuccessCard';
+import BackButton from '../utils/BackButton';
 
 const CollectionForm = () => {
 
@@ -43,9 +44,14 @@ const CollectionForm = () => {
   return (
     <div className="collection-form-page">
 
-      <div className="form-header">
-        <h1>Create Collection</h1>
-        <p>Organize your prompts into collections</p>
+      <div className="collection-form-header">
+        <BackButton />
+
+        <div className="collection-form-header-text">
+          <h1>Create Collection</h1>
+          <p>Organize your prompts into collections</p>
+        </div>
+
       </div>
 
       <form onSubmit={handleSubmit} className="collection-form">

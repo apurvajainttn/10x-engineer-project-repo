@@ -6,6 +6,7 @@ import LoadingSpinner from '../utils/LoadingSpinner';
 import ErrorMessage from '../utils/ErrorMessage';
 import './styles/PromptList.css'
 import SearchBar from '../utils/SearchBar';
+import BackButton from '../utils/BackButton';
 
 const PromptList = () => {
   const [prompts, setPrompts] = useState([]);
@@ -82,10 +83,17 @@ const PromptList = () => {
 
   return (
     <div className="prompt-list">
-      <div className="page-header">
-        <h1>Prompt Dashboard</h1>
-        <p>Manage and organize your AI prompts</p>
+      <div className="prompt-page-header">
+
+        <BackButton className="header-back-button" />
+
+        <div className="header-center">
+          <h1>Prompt Dashboard</h1>
+          <p>Manage and organize your AI prompts</p>
+        </div>
+
       </div>
+
       {successMessage && <div className="success-message">{successMessage}</div>}
 
       <div className="toolbar">

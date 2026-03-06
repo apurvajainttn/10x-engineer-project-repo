@@ -4,6 +4,7 @@ import { getPrompt } from '../../api/prompts';
 import LoadingSpinner from '../utils/LoadingSpinner';
 import ErrorMessage from '../utils/ErrorMessage';
 import './styles/PromptDetail.css';
+import BackButton from '../utils/BackButton';
 
 const PromptDetail = () => {
 
@@ -41,33 +42,44 @@ const PromptDetail = () => {
   return (
     <div className="prompt-detail-page">
 
-      <div className="prompt-detail-card">
+      <div className="prompt-detail-container">
 
-        <h1 className="prompt-title">
-          {prompt.title}
-        </h1>
+        <div className="prompt-detail-header">
 
-        <p className="prompt-description">
-          {prompt.description}
-        </p>
+          <BackButton />
 
-        <div className="prompt-content-box">
-          <pre>{prompt.content}</pre>
+          <div className="header-text">
+            <h1>Prompt Details</h1>
+            <p>View and manage your AI prompt</p>
+          </div>
+
         </div>
 
-        {prompt.tags?.length > 0 && (
-          <div className="prompt-tags">
+        <div className="prompt-detail-card">
 
-            <span className="tag-label">Tags:</span>
+          <h2 className="prompt-title">{prompt.title}</h2>
 
-            {prompt.tags.map((tag, index) => (
-              <span key={index} className="tag">
-                {tag}
-              </span>
-            ))}
+          <p className="prompt-description">{prompt.description}</p>
 
+          <div className="prompt-content-box">
+            <pre>{prompt.content}</pre>
           </div>
-        )}
+
+          {prompt.tags?.length > 0 && (
+            <div className="prompt-tags">
+
+              <span className="tag-label">Tags:</span>
+
+              {prompt.tags.map((tag, index) => (
+                <span key={index} className="tag">
+                  {tag}
+                </span>
+              ))}
+
+            </div>
+          )}
+
+        </div>
 
       </div>
 

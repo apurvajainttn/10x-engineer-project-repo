@@ -31,14 +31,14 @@ const PromptCard = ({ prompt, onDelete }) => {
 
         <div className="prompt-card-buttons">
 
-          <button
+          <Button
             className="edit-button"
             onClick={handleEditClick}
           >
             Edit
-          </button>
+          </Button>
 
-          <button
+          <Button
             className="delete-button"
             onClick={(e) => {
               e.stopPropagation();
@@ -46,7 +46,7 @@ const PromptCard = ({ prompt, onDelete }) => {
             }}
           >
             Delete
-          </button>
+          </Button>
 
         </div>
       </div>
