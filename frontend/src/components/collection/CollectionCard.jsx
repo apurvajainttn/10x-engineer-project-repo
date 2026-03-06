@@ -1,35 +1,73 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles/CollectionCard.css';
 import Button from '../utils/Button';
+import Modal from '../utils/Modal';
 
 const CollectionCard = ({ collection, onDelete }) => {
 
-  const handleDeleteClick = (e) => {
-    e.stopPropagation();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-    const confirmDelete = window.confirm(
-      `Are you sure you want to delete the collection: "${collection.name}"?`
-    );
-
-    if (confirmDelete) {
-      onDelete(collection.id);
-    }
+  const confirmDelete = () => {
+    onDelete(collection.id);
+    setShowDeleteModal(false);
   };
 
   return (
-    <div className="collection-card">
+    <>
+      <div className="collection-card">
 
-      <h3>{collection.name}</h3>
+        <h3>{collection.name}</h3>
 
-      <p>{collection.description}</p>
+        <p>{collection.description}</p>
 
-      <div className="collection-card-buttons">
-        <Button onClick={handleDeleteClick} className="delete-button">
-          Delete
-        </Button>
+        <div className="collection-card-buttons">
+          <Button
+            className="delete-button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowDeleteModal(true);
+            }}
+          >
+            Delete
+          </Button>
+        </div>
+
       </div>
 
-    </div>
+      <Modal
+        isVisible={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+      >
+        <div className="delete-modal">
+
+          <h3>Delete Collection</h3>
+
+          <p>
+            Are you sure you want to delete
+            <strong> "{collection.name}"</strong>?
+          </p>
+
+          <div className="modal-actions">
+
+            <Button
+              className="cancel-button"
+              onClick={() => setShowDeleteModal(false)}
+            >
+              Cancel
+            </Button>
+
+            <Button
+              className="confirm-delete-button"
+              onClick={confirmDelete}
+            >
+              Delete
+            </Button>
+
+          </div>
+
+        </div>
+      </Modal>
+    </>
   );
 };
 
